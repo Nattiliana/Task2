@@ -5,11 +5,14 @@ import by.courses.nattiliana.resource.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class LogoutCommand implements ActionCommand {
+/**
+ * Created by Nataly on 15.11.2016.
+ * ${VERSION}
+ */
+public class GoToRegistrationCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        String page = ConfigurationManager.getProperty(ConfigConstants.LOGIN_PAGE_PATH);
-        request.getSession().invalidate();
+        String page = ConfigurationManager.getProperty(ConfigConstants.REGISTRATION_PAGE_PATH);
         return page;
     }
 }

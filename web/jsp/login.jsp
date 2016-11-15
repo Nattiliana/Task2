@@ -1,23 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
-<head><title>Login</title></head>
+<head>
+    <title>Login</title>
+    <link href="css/styles.css" media="screen" rel="stylesheet">
+</head>
 <body>
+
 <form name="loginForm" method="POST" action="controller">
+    <br/>
     <input type="hidden" name="command" value="login"/>
     Enter login and password: <br/>
-    <br/>Login:<br/>
-    <input type="text" name="login" value=""/>
-    <br/>Password:<br/>
-    <input type="password" name="password" value=""/>
+    <input type="text" name="login" value="" class="input" placeholder="E-mail" required="required"/>  <br/>
+    <input type="password" name="password" value="" class="input" placeholder="Password" required="required"/>
     <br/>
     ${errorLoginPassMessage}
-    <br/>
     ${wrongAction}
-    <br/>
     ${nullPage}
     <br/>
-    <input type="submit" value="Log in"/>
-    <a href="controller?command=registration">Registration</a>
+    <input type="submit" class="button" value="Let me in!"/> <br/>
+    Don‘t have a profile? <a href="controller?command=go_to_registration">Sign up for free</a>
 </form>
 
 </body>

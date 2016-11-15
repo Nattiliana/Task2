@@ -1,5 +1,8 @@
 package by.courses.nattiliana.filter;
 
+import by.courses.nattiliana.constants.ConfigConstants;
+import by.courses.nattiliana.constants.Parameters;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -19,11 +22,11 @@ public class ServletSecurityFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpSession session = req.getSession();
 
-        ClientType type = (ClientType) session.getAttribute("userType");
+        ClientType type = (ClientType) session.getAttribute(Parameters.USERROLE);
         if (type == null) {
             type = ClientType.GUEST;
-            session.setAttribute("userType", type);
-            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/jsp/login.jsp");
+            session.setAttribute(Parameters.USERROLE, type);
+            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(ConfigConstants.LOGIN_PAGE_PATH);
             dispatcher.forward(req, resp);
             return;
         }

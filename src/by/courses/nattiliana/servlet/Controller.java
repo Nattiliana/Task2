@@ -2,6 +2,8 @@ package by.courses.nattiliana.servlet;
 
 import by.courses.nattiliana.command.ActionCommand;
 import by.courses.nattiliana.command.factory.ActionFactory;
+import by.courses.nattiliana.constants.ConfigConstants;
+import by.courses.nattiliana.constants.MessageConstants;
 import by.courses.nattiliana.resource.ConfigurationManager;
 import by.courses.nattiliana.resource.MessageManager;
 
@@ -41,8 +43,8 @@ public class Controller extends HttpServlet {
             dispatcher.forward(request, response);
         } else {
             // установка страницы c cообщением об ошибке
-            page = ConfigurationManager.getProperty("path.page.index");
-            request.getSession().setAttribute("nullPage", MessageManager.getProperty("message.nullpage"));
+            page = ConfigurationManager.getProperty(ConfigConstants.LOGIN_PAGE_PATH);
+            request.getSession().setAttribute("nullPage", MessageManager.getProperty(MessageConstants.PAGE_NOT_FOUND));
             response.sendRedirect(request.getContextPath() + page);
         }
     }

@@ -3,6 +3,7 @@ package by.courses.nattiliana.command.factory;
 import by.courses.nattiliana.command.ActionCommand;
 import by.courses.nattiliana.command.EmptyCommand;
 import by.courses.nattiliana.command.client.CommandEnum;
+import by.courses.nattiliana.constants.MessageConstants;
 import by.courses.nattiliana.resource.MessageManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,7 @@ public class ActionFactory {
 
       current = currentEnum.getCurrentCommand();
     } catch (IllegalArgumentException e) {
-      request.setAttribute("wrongAction", action + MessageManager.getProperty("message.wrongaction"));
+      request.setAttribute("wrongAction", action + MessageManager.getProperty(MessageConstants.COMMAND_NOT_FOUND));
     }
     return current;
   }

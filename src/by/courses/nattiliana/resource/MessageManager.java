@@ -1,9 +1,11 @@
 package by.courses.nattiliana.resource;
 
+import by.courses.nattiliana.constants.ConfigConstants;
+
 import java.util.ResourceBundle;
 
 public class MessageManager {
-    private final static ResourceBundle resourceBundle = ResourceBundle.getBundle("messages");
+    private final static ResourceBundle resourceBundle = ResourceBundle.getBundle(ConfigConstants.MESSAGES_SOURCE);
 
     // класс извлекает информацию из файла messages. properties
     private MessageManager() {
