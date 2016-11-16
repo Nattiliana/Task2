@@ -17,7 +17,6 @@ public enum ConnectionPool {
     INSTANCE;
 
     private DataSource dataSource;
-    private Connection connection;
 
     ConnectionPool(){
         try {
@@ -29,8 +28,7 @@ public enum ConnectionPool {
     }
 
     public Connection getConnection() throws SQLException {
-        connection = dataSource.getConnection();
-        return connection;
+        return dataSource.getConnection();
     }
 
     public void closeConnection(Connection connection) {

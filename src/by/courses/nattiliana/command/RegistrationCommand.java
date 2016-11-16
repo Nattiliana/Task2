@@ -25,10 +25,10 @@ public class RegistrationCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page;
-        String login = request.getParameter(Parameters.LOGIN);
-        String password = request.getParameter(Parameters.PASSWORD);
-        String name = request.getParameter(Parameters.NAME);
-        String surname = request.getParameter(Parameters.SURNAME);
+        login = request.getParameter(Parameters.LOGIN);
+        password = request.getParameter(Parameters.PASSWORD);
+        name = request.getParameter(Parameters.NAME);
+        surname = request.getParameter(Parameters.SURNAME);
         try {
             if (!(UserDAO.INSTANCE.isExists(login))) {
                 registrate();

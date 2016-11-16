@@ -7,6 +7,7 @@ package by.courses.nattiliana.constants;
 public class SQLRequests {
 
     public static final String GET_ALL_STUDENTS = "SELECT name, surname FROM users WHERE userRole = 0 ORDER BY name";
+    public static final String GET_ALL_SUBJECTS = "SELECT * FROM subjects";
     public static final String GET_ALL_ACCOUNTS = "SELECT * FROM accounts";
     public static final String GET_ALL_CARDS = "SELECT * FROM cards";
     public static final String ADD_STUDENT = "INSERT INTO users(login, password, name, surname) VALUES (?, ?, ?, ?)";

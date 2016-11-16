@@ -2,6 +2,7 @@ package by.courses.nattiliana.entities;
 
 public class Subject {
 
+    private int id;
     private String subjectName;
 
     @Override
@@ -34,5 +35,13 @@ public class Subject {
 
     public void setSubjectName(String subjectName) {
         this.subjectName = subjectName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

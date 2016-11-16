@@ -10,6 +10,7 @@ public class Parameters {
     public static final String SURNAME = "surname";
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
+    public static final String SUBJECT_LIST = "subjectList";
     public static final String ACCOUNT_ID = "accountid";
     public static final String CURRENCY = "currency";
     public static final String PAYMENT = "payment";

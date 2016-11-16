@@ -13,7 +13,8 @@
     <input type="text" name="login" value="" class="input" placeholder="E-mail" required="required"/>  <br/>
     <input type="password" name="password" value="" class="input" placeholder="Password" required="required"/>
     <br/>
-    ${errorLoginPassMessage}
+    ${errorLoginOrPassword}
+    ${errorDatabase}
     ${wrongAction}
     ${nullPage}
     <br/>

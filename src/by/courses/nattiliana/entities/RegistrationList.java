@@ -1,14 +1,13 @@
-/*
 package by.courses.nattiliana.entities;
 
-*/
 /**
  * Created by Nataly on 18.10.2016.
- *//*
+ */
 
 public class RegistrationList {
 
-    //private Student student;
+    private int id;
+    private String login;
     private int amountOfRightAnswers;
 
     @Override
@@ -18,7 +17,7 @@ public class RegistrationList {
         }
         if ((obj instanceof RegistrationList)) {
             RegistrationList other = (RegistrationList) obj;
-            if (other.student.equals(student)) {
+            if (other.login.equals(login)) {
                 return true;
             }
         }
@@ -27,20 +26,20 @@ public class RegistrationList {
 
     @Override
     public int hashCode() {
-        return 31 + ((student == null) ? 0 : student.hashCode());
+        return 31 + ((login == null) ? 0 : login.hashCode());
     }
 
     @Override
     public String toString() {
-        return "\nStudent: " + student + " Amount of right answers: " + amountOfRightAnswers;
+        return "Student login: " + login + " Amount of right answers: " + amountOfRightAnswers;
     }
 
-    public Student getStudent() {
-        return student;
+    public String getLogin() {
+        return login;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public int getAmountOfRightAnswers() {
@@ -51,4 +50,4 @@ public class RegistrationList {
         this.amountOfRightAnswers = amountOfRightAnswers;
     }
 }
-*/
+

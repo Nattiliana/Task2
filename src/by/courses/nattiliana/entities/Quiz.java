@@ -1,15 +1,10 @@
 package by.courses.nattiliana.entities;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 public class Quiz {
 
+    private int id;
     private String quizName;
-    private Subject subject;
-    private List<Question> questionsList = new ArrayList<>();
-    private Date dateOfCreate;
+    private int subjectId;
 
     @Override
     public boolean equals(Object obj) {
@@ -32,38 +27,31 @@ public class Quiz {
 
     @Override
     public String toString() {
-        return "\nQuiz name: " + quizName + " Questions list: " + questionsList + "\nDate: " + dateOfCreate;
+        return "Quiz [Quiz name: " + quizName + " Subject id: " + subjectId + "id: " + id;
     }
 
     public String getQuizName() {
-        return "\nQuiz name: " + quizName;
+        return quizName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(int subjectId) {
+        this.subjectId = subjectId;
     }
 
     public void setQuizName(String quizName) {
         this.quizName = quizName;
     }
 
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
-
-    public List<Question> getQuestionsList() {
-        return questionsList;
-    }
-
-    public void setQuestionsList(List<Question> questionsList) {
-        this.questionsList = questionsList;
-    }
-
-    public Date getDateOfCreate() {
-        return dateOfCreate;
-    }
-
-    public void setDateOfCreate(Date dateOfCreate) {
-        this.dateOfCreate = dateOfCreate;
-    }
 }

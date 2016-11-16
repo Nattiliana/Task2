@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 public class GoToRegistrationCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        String page = ConfigurationManager.getProperty(ConfigConstants.REGISTRATION_PAGE_PATH);
-        return page;
+        return ConfigurationManager.getProperty(ConfigConstants.REGISTRATION_PAGE_PATH);
     }
 }

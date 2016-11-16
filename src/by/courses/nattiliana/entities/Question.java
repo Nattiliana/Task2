@@ -1,14 +1,14 @@
 package by.courses.nattiliana.entities;
 
-import java.util.Map;
-import java.util.TreeMap;
 
 public class Question {
 
-    private int questionNumber;
+    private int id;
     private String question;
-    private Map<Integer, String> answerMap = new TreeMap<>();
     private int rightAnswer;
+    private int quizId;
+    private int questionNumber;
+
 
     @Override
     public boolean equals(Object obj) {
@@ -20,9 +20,8 @@ public class Question {
         }
         Question other = (Question) obj;
         if (question == null) {
-            if (other.question != null) {
-                return false;
-            } else if (!question.equals(other.question)) {
+            if (other.question != null) return false;
+            else if (!question.equals(null)) {
                 return false;
             }
         }
@@ -36,16 +35,16 @@ public class Question {
 
     @Override
     public String toString() {
-        return "\nQuestion number: " + questionNumber + " Question: " + question
-                + " Answers: " + answerMap + " Right answer: " + rightAnswer;
+        return "Question number: " + questionNumber + " Question: " + question
+                + " Right answer: " + rightAnswer;
     }
 
-    public int getQuestionNumber() {
-        return questionNumber;
+    public int getId() {
+        return id;
     }
 
-    public void setQuestionNumber(int questionNumber) {
-        this.questionNumber = questionNumber;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getQuestion() {
@@ -56,19 +55,27 @@ public class Question {
         this.question = question;
     }
 
-    public Map<Integer, String> getAnswerMap() {
-        return answerMap;
-    }
-
-    public void setAnswerMap(Map<Integer, String> answerMap) {
-        this.answerMap = answerMap;
-    }
-
     public int getRightAnswer() {
         return rightAnswer;
     }
 
     public void setRightAnswer(int rightAnswer) {
         this.rightAnswer = rightAnswer;
+    }
+
+    public int getQuizId() {
+        return quizId;
+    }
+
+    public void setQuizId(int quizId) {
+        this.quizId = quizId;
+    }
+
+    public int getQuestionNumber() {
+        return questionNumber;
+    }
+
+    public void setQuestionNumber(int questionNumber) {
+        this.questionNumber = questionNumber;
     }
 }

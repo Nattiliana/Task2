@@ -17,12 +17,12 @@
             if (atpos < 1 || ( dotpos - atpos < 2 ))
             {
 
-                alert("Please enter correct email")
+                alert("Please enter correct email");
                 document.RegistrationForm.login.focus() ;
                 return false;
             }
             if (pass1 != pass2){
-                alert("Passwords are not equal!")
+                alert("Passwords are not equal!");
                 return false;
             }
             return( true );
@@ -44,9 +44,8 @@
     <input type="text" name="name" value="" class="input" placeholder="Name" required="required"/> <br/>
     <input type="text" name="surname" value="" class="input" placeholder="Surname" required="required"/>
     <br/>
-    ${errorLoginPassMessage}
-    ${wrongAction}
-    ${nullPage}
+    ${registrationMessage}
+    ${errorUserExsists}
     <br/>
     <input type="submit" class="button" value="Create my account"/> <br/>
     Already have an account? <a href="controller?command=return">Log in.</a>
