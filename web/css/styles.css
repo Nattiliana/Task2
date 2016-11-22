@@ -7,6 +7,11 @@ body {
     font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, sans-serif;
 }
 
+table {
+    width: 300px;
+    margin: auto;
+}
+
 a {
     color: #fff;
     text-decoration: none;

@@ -16,17 +16,15 @@ import java.util.List;
  * Created by Nataly on 15.11.2016.
  * ${VERSION}
  */
-public enum  SubjectDAO {
-    INSTANCE;
+public class  SubjectDAO {
 
-    public List<Subject> findAll() throws SQLException {
+    public static List<Subject> findAll() throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_ALL_SUBJECTS);
         ResultSet resultSet = preparedStatement.executeQuery();
         List<Subject> subjectList = new ArrayList<>();
         while (resultSet.next()){
             Subject subject = new Subject();
-            subject.setId(resultSet.getInt(ColumnNames.SUBJECT_ID));
             subject.setSubjectName(resultSet.getString(ColumnNames.SUBJECT_NAME));
             subjectList.add(subject);
         }

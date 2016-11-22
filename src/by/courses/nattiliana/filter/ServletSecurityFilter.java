@@ -5,12 +5,13 @@ import by.courses.nattiliana.constants.Parameters;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(/*urlPatterns = {"/controller"},*/ servletNames = {"Controller"})
+/*@WebFilter(*//*urlPatterns = {"/controller"},*//* servletNames = {"Controller"})
 public class ServletSecurityFilter implements Filter {
     private FilterConfig filterConfig;
 
@@ -36,5 +37,29 @@ public class ServletSecurityFilter implements Filter {
 
     public void init(FilterConfig fConfig) throws ServletException {
         this.filterConfig = fConfig;
+    }
+}*/
+
+@WebFilter( urlPatterns = {"/jsp/*"},
+initParams = { @WebInitParam(name = "LOGIN_PAGE", value = "/login.jsp")})
+public class ServletSecurityFilter implements Filter {
+    private String loginPath;
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        loginPath = filterConfig.getInitParameter("LOGIN_PAGE");
+    }
+
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
+        httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + loginPath);
+        filterChain.doFilter(servletRequest, servletResponse);
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }

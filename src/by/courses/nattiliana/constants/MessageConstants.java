@@ -12,6 +12,8 @@ public class MessageConstants {
     public static final String ERROR_DATABASE = "message.databaseerror";
     public static final String USER_EXISTS = "message.userexsistserror";
     public static final String SUCCESS_REGISTRATION = "message.successregistration";
+    public static final String EMPTY_LIST = "message.emptylist";
+    public static final String EMPTY_CHOICE = "message.emptychoice";
 
     private MessageConstants(){}
 }

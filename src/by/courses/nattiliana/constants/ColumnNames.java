@@ -16,18 +16,16 @@ public class ColumnNames {
     public static final String SUBJECT_ID = "id";
     public static final String SUBJECT_NAME = "name";
 
-    public static final String ACCOUNT_ID = "aid";
-    public static final String ACCOUNT_CURRENCY = "currency";
-    public static final String ACCOUNT_AMOUNT = "amount";
-    public static final String ACCOUNT_STATUS = "status";
+    public static final String QUIZ_ID = "id";
+    public static final String QUIZ_NAME = "name";
+    public static final String QUIZ_SUBJECT_ID = "subjectId";
+    public static final String QUIZ_STATUS = "status";
 
-    public static final String CARD_ID = "cid";
-    public static final String CARD_VALIDITY = "validity";
-
-    public static final String OPERATION_ID = "oid";
-    public static final String OPERATION_DESCRIPTION = "description";
-    public static final String OPERATION_AMOUNT = "amount";
-    public static final String OPERATION_DATE = "date";
+    public static final String QUESTION_ID = "id";
+    public static final String QUESTION = "question";
+    public static final String QUESTION_ANSWER = "rightAnswerNumber";
+    public static final String QUESTION_QUIZ_ID = "quizId";
+    public static final String QUESTION_NUMBER = "questionNumber";
 
     private ColumnNames(){}
 }

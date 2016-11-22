@@ -6,6 +6,7 @@
     <welcome-file-list>
         <welcome-file>/login.jsp</welcome-file>
     </welcome-file-list>
+
     <error-page>
         <error-code>404</error-code>
         <location>/jsp/error/error.jsp</location>
@@ -17,6 +18,7 @@
     <session-config>
         <session-timeout>1</session-timeout>
     </session-config>
+
 
     <description>MySQL Test App</description>
     <resource-ref>

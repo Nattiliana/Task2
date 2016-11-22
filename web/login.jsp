@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page session="true" language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>Login</title>
@@ -10,7 +10,7 @@
     <br/>
     <input type="hidden" name="command" value="login"/>
     Enter login and password: <br/>
-    <input type="text" name="login" value="" class="input" placeholder="E-mail" required="required"/>  <br/>
+    <input type="text" name="login" value="" class="input" placeholder="E-mail" required="required"/> <br/>
     <input type="password" name="password" value="" class="input" placeholder="Password" required="required"/>
     <br/>
     ${errorLoginOrPassword}

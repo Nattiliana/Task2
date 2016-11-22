@@ -18,8 +18,7 @@ import java.util.List;
  * Created by Nataly on 14.11.2016.
  * ${VERSION}
  */
-public enum UserDAO {
-    INSTANCE;
+public class UserDAO {
 
     public List<User> findAll() throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
@@ -36,7 +35,7 @@ public enum UserDAO {
         return userList;
     }
 
-    public boolean isAuthorized(String login, String password) throws SQLException {
+    public static boolean isAuthorized(String login, String password) throws SQLException {
         boolean isUser = false;
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.CHECK_AUTHORIZATION);
@@ -50,7 +49,7 @@ public enum UserDAO {
         return isUser;
     }
 
-    public boolean isExists (String login) throws SQLException {
+    public static boolean isExists(String login) throws SQLException {
         boolean isExistsUser = false;
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.CHECK_LOGIN);
@@ -63,7 +62,7 @@ public enum UserDAO {
         return isExistsUser;
     }
 
-    public void createEntity (User user) throws SQLException {
+    public static void createEntity(User user) throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.ADD_STUDENT);
         preparedStatement.setString(1, user.getLogin());
@@ -74,7 +73,7 @@ public enum UserDAO {
         ConnectionPool.INSTANCE.closeConnection(connection);
     }
 
-    public ClientType checkUserRole (String login) throws SQLException {
+    public static ClientType checkUserRole(String login) throws SQLException {
         ClientType clientType = null;
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.CHECK_USER_ROLE);
@@ -91,7 +90,7 @@ public enum UserDAO {
         return clientType;
     }
 
-    public User getUserByLogin(String login) throws SQLException{
+    public static User getUserByLogin(String login) throws SQLException{
         User user = null;
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_USER_BY_LOGIN);

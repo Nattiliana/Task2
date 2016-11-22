@@ -5,6 +5,7 @@ public class Quiz {
     private int id;
     private String quizName;
     private int subjectId;
+    private int status;
 
     @Override
     public boolean equals(Object obj) {
@@ -27,7 +28,7 @@ public class Quiz {
 
     @Override
     public String toString() {
-        return "Quiz [Quiz name: " + quizName + " Subject id: " + subjectId + "id: " + id;
+        return "Quiz [Quiz name: " + quizName + "id: " + id;
     }
 
     public String getQuizName() {
@@ -54,4 +55,11 @@ public class Quiz {
         this.quizName = quizName;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }
