@@ -19,15 +19,22 @@
     <input type="hidden" name="command" value="show_quiz_next" />
     <table align="center" border="1">
         <tr bgcolor="#9841C4">
-            <td align="center"><strong>Quiz Name</strong></td>
-            <td align="center"><strong>Subject ID</strong></td>
+            <td align="center"><strong>ID</strong></td>
+            <td align="center"><strong>Number</strong></td>
+            <td align="center"><strong>Question</strong></td>
         </tr>
-        <c:forEach var="quiz" items="${quizList}">
+            <c:forEach var="question" items="${questionList}">
             <tr>
-                <td><c:out value="${quiz.quizName}"/></td>
-                <td><c:out value="${quiz.subjectId}"/></td>
-                <td><input type="radio" name="questionInQuiz" value="${quiz.id}"/><br></td>
+                <td><input type="radio" name="qId" value="${question.id}"/><br></td>
+                <td><c:out value="${question.questionNumber}"/></td>
+                <td><c:out value="${question.question}"/></td>
             </tr>
+            <c:forEach var="ans" items="${answerList}">
+                <tr>
+                    <td><c:out value="${ans.answer}"/></td>
+                    <td><input type="radio" name="answer" value="${ans.id}"/><br></td>
+                </tr>
+            </c:forEach>
         </c:forEach>
     </table>
     ${errorDatabase}

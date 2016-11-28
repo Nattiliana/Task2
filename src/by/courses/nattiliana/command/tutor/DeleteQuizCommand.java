@@ -11,6 +11,7 @@ import by.courses.nattiliana.entities.Question;
 import by.courses.nattiliana.entities.Quiz;
 import by.courses.nattiliana.entities.Subject;
 import by.courses.nattiliana.filter.ClientType;
+import by.courses.nattiliana.log4j.QuizLogger;
 import by.courses.nattiliana.resource.ConfigurationManager;
 import by.courses.nattiliana.resource.MessageManager;
 
@@ -32,25 +33,26 @@ public class DeleteQuizCommand implements ActionCommand {
         HttpSession httpSession = request.getSession();
         ClientType clientType = (ClientType) httpSession.getAttribute(Parameters.USERROLE);
         if (clientType == ClientType.ADMINISTRATOR) {
-            if (request.getParameter("deleteId") != null) {
-                int id = Integer.valueOf(request.getParameter("deleteId"));
-                try {
+            try {
+                List<Quiz> quizList = QuizDAO.findAllAvailable();
+                httpSession.setAttribute(Parameters.QUIZ_LIST, quizList);
+                if (request.getParameter(Parameters.DELETE) != null) {
+                    int id = Integer.valueOf(request.getParameter(Parameters.DELETE));
                     QuizDAO.deleteQuiz(id);
-                    List<Quiz> quizList = QuizDAO.findAll();
-                    httpSession.setAttribute(Parameters.QUIZ_LIST, quizList);
+                    request.setAttribute(Parameters.REGISTRATION_MESSAGE, MessageManager.getProperty(MessageConstants.SUCCESS_REGISTRATION));
                     page = ConfigurationManager.getProperty(ConfigConstants.DELETE_QUIZ_PAGE_PATH);
-                } catch (SQLException e) {
-                    page = ConfigurationManager.getProperty(ConfigConstants.ERROR_PAGE_PATH);
-                    request.setAttribute(Parameters.ERROR_DATABASE, MessageManager.getProperty(MessageConstants.ERROR_DATABASE));
+                } else if (!((List) httpSession.getAttribute(Parameters.QUIZ_LIST)).isEmpty()) {
+                    request.setAttribute(Parameters.ERROR_EMPTY_CHOICE, MessageManager.getProperty(MessageConstants.EMPTY_CHOICE));
+                    page = ConfigurationManager.getProperty(ConfigConstants.DELETE_QUIZ_PAGE_PATH);
+                } else {
+                    request.setAttribute(Parameters.ERROR_EMPTY_LIST, MessageManager.getProperty(MessageConstants.EMPTY_LIST));
+                    page = ConfigurationManager.getProperty(ConfigConstants.DELETE_QUIZ_PAGE_PATH);
                 }
-            } else if (!((List) httpSession.getAttribute(Parameters.QUIZ_LIST)).isEmpty()) {
-                request.setAttribute(Parameters.ERROR_EMPTY_CHOICE, MessageManager.getProperty(MessageConstants.EMPTY_CHOICE));
-                page = ConfigurationManager.getProperty(ConfigConstants.DELETE_QUIZ_PAGE_PATH);
-            } else {
-                request.setAttribute(Parameters.ERROR_EMPTY_LIST, MessageManager.getProperty(MessageConstants.EMPTY_LIST));
-                page = ConfigurationManager.getProperty(ConfigConstants.DELETE_QUIZ_PAGE_PATH);
+            } catch (SQLException e) {
+                QuizLogger.logError(getClass(), e.getMessage());
+                page = ConfigurationManager.getProperty(ConfigConstants.ERROR_PAGE_PATH);
+                request.setAttribute(Parameters.ERROR_DATABASE, MessageManager.getProperty(MessageConstants.ERROR_DATABASE));
             }
-
         } else {
             page = ConfigurationManager.getProperty(ConfigConstants.LOGIN_PAGE_PATH);
             httpSession.invalidate();

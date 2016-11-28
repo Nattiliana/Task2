@@ -7,7 +7,7 @@ package by.courses.nattiliana.entities;
 public class RegistrationList {
 
     private int id;
-    private String login;
+    private String student;
     private int amountOfRightAnswers;
 
     @Override
@@ -17,7 +17,7 @@ public class RegistrationList {
         }
         if ((obj instanceof RegistrationList)) {
             RegistrationList other = (RegistrationList) obj;
-            if (other.login.equals(login)) {
+            if (other.student.equals(student)) {
                 return true;
             }
         }
@@ -26,20 +26,20 @@ public class RegistrationList {
 
     @Override
     public int hashCode() {
-        return 31 + ((login == null) ? 0 : login.hashCode());
+        return 31 + ((student == null) ? 0 : student.hashCode());
     }
 
     @Override
     public String toString() {
-        return "Student login: " + login + " Amount of right answers: " + amountOfRightAnswers;
+        return "Student login: " + student + " Amount of right answers: " + amountOfRightAnswers;
     }
 
-    public String getLogin() {
-        return login;
+    public String getStudent() {
+        return student;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setStudent(String student) {
+        this.student = student;
     }
 
     public int getAmountOfRightAnswers() {
@@ -48,6 +48,14 @@ public class RegistrationList {
 
     public void setAmountOfRightAnswers(int amountOfRightAnswers) {
         this.amountOfRightAnswers = amountOfRightAnswers;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
 

@@ -22,7 +22,9 @@ public class ConfigConstants {
 
     public static final String STUDENT_PAGE_PATH = "path.page.student";
     public static final String QUIZ_PAGE_PATH = "path.page.quiz";
+    public static final String QUIZ_NEXT_PAGE_PATH = "path.page.quiz.next";
     public static final String STUDENT_STATISTICS_PAGE_PATH = "path.page.studentStatistics";
+    public static final String UPDATE_STUDENT = "path.page.update";
 
 
     private ConfigConstants(){}

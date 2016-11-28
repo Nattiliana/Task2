@@ -11,6 +11,7 @@ import by.courses.nattiliana.entities.Question;
 import by.courses.nattiliana.entities.Quiz;
 import by.courses.nattiliana.entities.Subject;
 import by.courses.nattiliana.filter.ClientType;
+import by.courses.nattiliana.log4j.QuizLogger;
 import by.courses.nattiliana.resource.ConfigurationManager;
 import by.courses.nattiliana.resource.MessageManager;
 
@@ -26,11 +27,12 @@ import java.util.List;
 public class CreateQuizCommand implements ActionCommand {
 
     private static String quizName;
+    private static int subjectId;
+    private static int questionId;
 
     @Override
     public String execute(HttpServletRequest request) {
         String page;
-        quizName = request.getParameter(Parameters.QUIZ_NAME);
         HttpSession httpSession = request.getSession();
         ClientType clientType = (ClientType) httpSession.getAttribute(Parameters.USERROLE);
         if (clientType == ClientType.ADMINISTRATOR) {
@@ -39,18 +41,22 @@ public class CreateQuizCommand implements ActionCommand {
                 httpSession.setAttribute(Parameters.SUBJECT_LIST, subjectList);
                 List<Question> questionList = QuestionDAO.findAll();
                 httpSession.setAttribute(Parameters.QUESTION_LIST, questionList);
-                //addQuiz();
-                //if (isNotEmpty()) {
-                page = ConfigurationManager.getProperty(ConfigConstants.CREATE_QUIZ_PAGE_PATH);
-                request.setAttribute(Parameters.REGISTRATION_MESSAGE,
-                        MessageManager.getProperty(MessageConstants.SUCCESS_REGISTRATION));
-                //} else {
-                //    page = ConfigurationManager.getProperty(ConfigConstants.CREATE_QUIZ_PAGE_PATH);
-                //    request.setAttribute(Parameters.ERROR_USER_EXISTS,
-                //           MessageManager.getProperty(MessageConstants.USER_EXISTS));
-                //}
-
+                if ((request.getParameter(Parameters.QUESTION) != null) && (request.getParameter(Parameters.SUBJECT) != null) ) {
+//                    quizName = request.getParameter(Parameters.QUIZ_NAME);
+//                    subjectId = Integer.valueOf(request.getParameter(Parameters.SUBJECT));
+//                    questionId = Integer.valueOf(request.getParameter(Parameters.QUESTION));
+                    //addQuiz();
+                    //QuestionDAO.addQuestion(questionId, subjectId);
+                    page = ConfigurationManager.getProperty(ConfigConstants.CREATE_QUIZ_PAGE_PATH);
+                    request.setAttribute(Parameters.REGISTRATION_MESSAGE,
+                            MessageManager.getProperty(MessageConstants.SUCCESS_REGISTRATION));
+                } else {
+                    page = ConfigurationManager.getProperty(ConfigConstants.CREATE_QUIZ_PAGE_PATH);
+                    request.setAttribute(Parameters.ERROR_USER_EXISTS,
+                            MessageManager.getProperty(MessageConstants.USER_EXISTS));
+                }
             } catch (SQLException e) {
+                QuizLogger.logError(getClass(), e.getMessage());
                 page = ConfigurationManager.getProperty(ConfigConstants.ERROR_PAGE_PATH);
                 request.setAttribute(Parameters.ERROR_DATABASE, MessageManager.getProperty(MessageConstants.ERROR_DATABASE));
             }
@@ -72,7 +78,13 @@ public class CreateQuizCommand implements ActionCommand {
     private void addQuiz() throws SQLException {
         Quiz quiz = new Quiz();
         quiz.setQuizName(quizName);
-        quiz.setSubjectId(1);
+        quiz.setSubjectId(subjectId);
         QuizDAO.createEntity(quiz);
     }
+
+    /*private void addQuestion() throws SQLException {
+        Question question = new Question();
+        question.setQuizId(quizId);
+        QuestionDAO.createEntity();
+    }*/
 }

@@ -107,4 +107,14 @@ public class UserDAO {
         ConnectionPool.INSTANCE.closeConnection(connection);
         return user;
     }
+
+    public static void updateUser(String login, String name, String surname) throws SQLException{
+        Connection connection = ConnectionPool.INSTANCE.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SQLRequests.UPDATE_USER);
+        statement.setString(1, name);
+        statement.setString(2, surname);
+        statement.setString(3, login);
+        statement.executeUpdate();
+        ConnectionPool.INSTANCE.closeConnection(connection);
+    }
 }

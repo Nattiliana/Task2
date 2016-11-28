@@ -5,6 +5,7 @@ public class Quiz {
     private int id;
     private String quizName;
     private int subjectId;
+    private String subjectName;
     private int status;
 
     @Override
@@ -28,7 +29,7 @@ public class Quiz {
 
     @Override
     public String toString() {
-        return "Quiz [Quiz name: " + quizName + "id: " + id;
+        return "Quiz [Quiz name: " + quizName + " id: " + id + " Subject name: " + subjectName;
     }
 
     public String getQuizName() {
@@ -61,5 +62,13 @@ public class Quiz {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
     }
 }

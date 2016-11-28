@@ -35,6 +35,24 @@ public class QuizDAO {
         return quizList;
     }
 
+    public static List<Quiz> findAllAvailable() throws SQLException {
+        Connection connection = ConnectionPool.INSTANCE.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_ALL_AVAILABLE_QUIZZES);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Quiz> quizList = new ArrayList<>();
+        while (resultSet.next()){
+            Quiz quiz = new Quiz();
+            quiz.setId(resultSet.getInt(ColumnNames.QUIZ_ID));
+            quiz.setQuizName(resultSet.getString(ColumnNames.QUIZ_NAME));
+            quiz.setSubjectId(resultSet.getInt(ColumnNames.QUIZ_SUBJECT_ID));
+            quiz.setQuizName(resultSet.getString(ColumnNames.SUBJECT_NAME));
+            quiz.setStatus(resultSet.getInt(ColumnNames.QUIZ_STATUS));
+            quizList.add(quiz);
+        }
+        ConnectionPool.INSTANCE.closeConnection(connection);
+        return quizList;
+    }
+
     public static void createEntity(Quiz quiz) throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.ADD_QUIZ);
@@ -42,6 +60,19 @@ public class QuizDAO {
         preparedStatement.setInt(2, quiz.getSubjectId());
         preparedStatement.execute();
         ConnectionPool.INSTANCE.closeConnection(connection);
+    }
+
+    public static boolean isExists(String name) throws SQLException {
+        boolean isExistsQuiz = false;
+        Connection connection = ConnectionPool.INSTANCE.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.CHECK_QUIZ_NAME);
+        preparedStatement.setString(1, name);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()){
+            isExistsQuiz = true;
+        }
+        ConnectionPool.INSTANCE.closeConnection(connection);
+        return isExistsQuiz;
     }
 
     public static void deleteQuiz(int id) throws SQLException{

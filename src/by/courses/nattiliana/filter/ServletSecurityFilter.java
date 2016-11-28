@@ -40,7 +40,7 @@ public class ServletSecurityFilter implements Filter {
     }
 }*/
 
-@WebFilter( urlPatterns = {"/jsp/*"},
+/*@WebFilter( urlPatterns = {"/jsp*//*"},
 initParams = { @WebInitParam(name = "LOGIN_PAGE", value = "/login.jsp")})
 public class ServletSecurityFilter implements Filter {
     private String loginPath;
@@ -61,5 +61,23 @@ public class ServletSecurityFilter implements Filter {
     @Override
     public void destroy() {
 
+    }*/
+@WebFilter( urlPatterns = { "/jsp/*" },
+        initParams = { @WebInitParam(name = "LOGIN_PATH", value = "/login.jsp") })
+public class ServletSecurityFilter implements Filter {
+    private String loginPath;
+    public void init(FilterConfig fConfig) throws ServletException {
+        loginPath = fConfig.getInitParameter("LOGIN_PATH");
+    }
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        // переход на заданную страницу
+        httpResponse.sendRedirect(httpRequest.getContextPath() + loginPath);
+        chain.doFilter(request, response);
+    }
+    public void destroy() {
     }
 }
+

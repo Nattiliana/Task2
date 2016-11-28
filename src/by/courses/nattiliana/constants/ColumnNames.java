@@ -27,5 +27,13 @@ public class ColumnNames {
     public static final String QUESTION_QUIZ_ID = "quizId";
     public static final String QUESTION_NUMBER = "questionNumber";
 
+    public static final String RL_ID = "id";
+    public static final String RL_STUDENT = "student";
+    public static final String RL_ANSWERS = "amountOfRightAnswers";
+
+    public static final String ANSWER_ID = "id";
+    public static final String ANSWER_QUESTION_ID = "questionId";
+    public static final String ANSWER = "answer";
+
     private ColumnNames(){}
 }
