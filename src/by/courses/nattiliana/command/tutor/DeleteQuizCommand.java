@@ -29,13 +29,12 @@ public class DeleteQuizCommand implements ActionCommand {
         ClientType clientType = (ClientType) httpSession.getAttribute(Parameters.USERROLE);
         if (clientType == ClientType.ADMINISTRATOR) {
             try {
-                List<Quiz> quizList = QuizDAO.findAllAvailable();
-                httpSession.setAttribute(Parameters.QUIZ_LIST, quizList);
                 if (request.getParameter(Parameters.DELETE) != null) {
                     int id = Integer.valueOf(request.getParameter(Parameters.DELETE));
                     QuizDAO.deleteQuiz(id);
                     request.setAttribute(Parameters.DELETE_MESSAGE, MessageManager.getProperty(MessageConstants.SUCCESS_DELETE));
                     page = ConfigurationManager.getProperty(ConfigConstants.TUTOR_PAGE_PATH);
+                    QuizLogger.logInfo(getClass(), MessageManager.getProperty(MessageConstants.SUCCESS_DELETE));
                 } else if (!((List) httpSession.getAttribute(Parameters.QUIZ_LIST)).isEmpty()) {
                     request.setAttribute(Parameters.ERROR_EMPTY_CHOICE, MessageManager.getProperty(MessageConstants.EMPTY_CHOICE));
                     page = ConfigurationManager.getProperty(ConfigConstants.DELETE_QUIZ_PAGE_PATH);

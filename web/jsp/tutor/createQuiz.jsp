@@ -14,7 +14,7 @@
     </script>
 </head>
 <body>
-<form name="CreateForm" method="POST" action="controller" onsubmit="return validate_form ( );">
+<form name="CreateForm" method="POST" action="controller" <%--onsubmit="return validate_form ( );"--%>>
     <input type="hidden" name="command" value="create_quiz"/>
     Choose subject: <br/>
     <table align="center" border="1">
@@ -32,7 +32,7 @@
     </table>
     <br/>
     Enter quiz name: <br/>
-    <input type="text" name="name" value="" class="input" placeholder="Quiz name" required="required"/> <br/>
+    <input type="text" name="name" value="" class="input" placeholder="Quiz name" <%--required="required"--%>/> <br/>
     <br/>
     Choose questions:
     <table align="center" border="1">
@@ -44,11 +44,11 @@
         </tr>
         <c:forEach var="q" items="${questionList}">
             <tr>
-                    <td><c:out value="${q.id}"/></td>
+                <td><c:out value="${q.id}"/></td>
                 <td><c:out value="${q.questionNumber}"/></td>
                 <td><c:out value="${q.question}"/></td>
                 <td><c:out value="${q.quizId}"/></td>
-                <td><input type="radio" name="question" value="${q.id}"/><br></td>
+                <td><input type="checkbox" name="question" value="${q.id}"/><br></td>
             </tr>
         </c:forEach>
     </table>

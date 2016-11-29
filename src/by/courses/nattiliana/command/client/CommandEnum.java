@@ -86,6 +86,16 @@ public enum CommandEnum {
         {
             this.command = new GoToCreateQuizCommand();
         }
+    },
+    GO_TO_DELETE_QUIZ {
+        {
+            this.command = new GoToDeleteQuizCommand();
+        }
+    },
+    GO_TO_DELETE_USER {
+        {
+            this.command = new GoToDeleteUserCommand();
+        }
     };
 
     ActionCommand command;

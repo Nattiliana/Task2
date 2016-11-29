@@ -17,10 +17,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Created by Nataly on 28.11.2016.
+ * Created by Nataly on 29.11.2016.
  * ${VERSION}
  */
-public class DeleteUserCommand implements ActionCommand {
+public class GoToDeleteUserCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -29,18 +29,9 @@ public class DeleteUserCommand implements ActionCommand {
         ClientType clientType = (ClientType) httpSession.getAttribute(Parameters.USERROLE);
         if (clientType == ClientType.ADMINISTRATOR) {
             try {
-                if (request.getParameter(Parameters.DELETE_USER) != null) {
-                    String login = String.valueOf(request.getParameter(Parameters.DELETE_USER));
-                    UserDAO.deleteUser(login);
-                    page = ConfigurationManager.getProperty(ConfigConstants.TUTOR_PAGE_PATH);
-                    request.setAttribute(Parameters.DELETE_MESSAGE, MessageManager.getProperty(MessageConstants.SUCCESS_DELETE));
-                } else if (!((List) httpSession.getAttribute(Parameters.USER_LIST)).isEmpty()) {
-                    request.setAttribute(Parameters.ERROR_EMPTY_CHOICE, MessageManager.getProperty(MessageConstants.EMPTY_CHOICE));
-                    page = ConfigurationManager.getProperty(ConfigConstants.DELETE_USER_PAGE_PATH);
-                } else {
-                    request.setAttribute(Parameters.ERROR_EMPTY_LIST, MessageManager.getProperty(MessageConstants.EMPTY_LIST));
-                    page = ConfigurationManager.getProperty(ConfigConstants.DELETE_USER_PAGE_PATH);
-                }
+                List<User> userList = UserDAO.findAll();
+                httpSession.setAttribute(Parameters.USER_LIST, userList);
+                page = ConfigurationManager.getProperty(ConfigConstants.DELETE_USER_PAGE_PATH);
             } catch (SQLException e) {
                 QuizLogger.logError(getClass(), e.getMessage());
                 page = ConfigurationManager.getProperty(ConfigConstants.ERROR_PAGE_PATH);
