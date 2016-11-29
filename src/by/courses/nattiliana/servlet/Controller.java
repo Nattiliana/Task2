@@ -3,13 +3,10 @@ package by.courses.nattiliana.servlet;
 import by.courses.nattiliana.command.ActionCommand;
 import by.courses.nattiliana.command.factory.ActionFactory;
 import by.courses.nattiliana.constants.ConfigConstants;
-import by.courses.nattiliana.constants.MessageConstants;
 import by.courses.nattiliana.resource.ConfigurationManager;
-import by.courses.nattiliana.resource.MessageManager;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

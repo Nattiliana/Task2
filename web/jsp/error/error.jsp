@@ -7,5 +7,5 @@
  <br/>
  Status code: ${pageContext.errorData.statusCode}
  <br/>
- Exception: ${pageContext.errorData.throwable}
+ Exception: ${pageContext.errorData.throwable} ${errorDatabase}
 </body></html>

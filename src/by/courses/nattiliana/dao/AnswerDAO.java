@@ -4,7 +4,6 @@ import by.courses.nattiliana.connectionPool.ConnectionPool;
 import by.courses.nattiliana.constants.ColumnNames;
 import by.courses.nattiliana.constants.SQLRequests;
 import by.courses.nattiliana.entities.Answer;
-import by.courses.nattiliana.entities.Question;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

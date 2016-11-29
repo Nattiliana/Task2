@@ -26,8 +26,11 @@ public class Parameters {
     public static final String ERROR_USER_EXISTS = "errorUserExsists";
     public static final String REGISTRATION_MESSAGE = "registrationMessage";
     public static final String UPDATE_MESSAGE = "updateMessage";
+    public static final String DELETE_MESSAGE = "deleteMessage";
+    public static final String ADD_MESSAGE = "addMessage";
 
     public static final String DELETE = "toDelete";
+    public static final String DELETE_USER = "toDeleteUser";
     public static final String QUESTION = "question";
     public static final String SUBJECT = "subject";
     public static final String ANSWERS ="answers";
@@ -35,6 +38,7 @@ public class Parameters {
     public static final String QUESTION_IN_QUIZ = "questionInQuiz";
     public static final String ANSWER_LIST ="answerList";
     public static final String QID = "qId";
+    public static final String BUTTON = "button";
 
 
     private Parameters(){}

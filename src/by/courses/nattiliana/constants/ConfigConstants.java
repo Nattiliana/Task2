@@ -10,7 +10,6 @@ public class ConfigConstants {
     public static final String MESSAGES_SOURCE = "messages";
     public static final String DATABASE_SOURCE = "java:/comp/env/jdbc/TestDB";
 
-    public static final String INDEX_PAGE_PATH = "path.page.index";
     public static final String LOGIN_PAGE_PATH = "path.page.login";
     public static final String REGISTRATION_PAGE_PATH = "path.page.registration";
     public static final String ERROR_PAGE_PATH = "path.page.error";
@@ -19,6 +18,7 @@ public class ConfigConstants {
     public static final String CREATE_QUIZ_PAGE_PATH = "path.page.createQuiz";
     public static final String DELETE_QUIZ_PAGE_PATH = "path.page.deleteQuiz";
     public static final String TUTOR_STATISTICS_PAGE_PATH = "path.page.tutorStatistics";
+    public static final String DELETE_USER_PAGE_PATH = "path.page.deleteUser";
 
     public static final String STUDENT_PAGE_PATH = "path.page.student";
     public static final String QUIZ_PAGE_PATH = "path.page.quiz";

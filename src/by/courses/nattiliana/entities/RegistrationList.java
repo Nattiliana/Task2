@@ -1,9 +1,5 @@
 package by.courses.nattiliana.entities;
 
-/**
- * Created by Nataly on 18.10.2016.
- */
-
 public class RegistrationList {
 
     private int id;

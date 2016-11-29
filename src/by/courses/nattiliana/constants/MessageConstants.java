@@ -15,6 +15,8 @@ public class MessageConstants {
     public static final String EMPTY_LIST = "message.emptylist";
     public static final String EMPTY_CHOICE = "message.emptychoice";
     public static final String SUCCESS_UPDATE = "message.successupdate";
+    public static final String SUCCESS_DELETE = "message.successdelete";
+    public static final String SUCCESS_ADD = "message.successadd";
 
     private MessageConstants(){}
 }

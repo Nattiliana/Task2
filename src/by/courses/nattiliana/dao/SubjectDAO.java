@@ -25,6 +25,7 @@ public class  SubjectDAO {
         List<Subject> subjectList = new ArrayList<>();
         while (resultSet.next()){
             Subject subject = new Subject();
+            subject.setId(resultSet.getInt(ColumnNames.SUBJECT_ID));
             subject.setSubjectName(resultSet.getString(ColumnNames.SUBJECT_NAME));
             subjectList.add(subject);
         }

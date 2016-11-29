@@ -9,23 +9,18 @@ public class Question {
     private int quizId;
     private int questionNumber;
 
-
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Question)) {
-            return false;
-        }
-        Question other = (Question) obj;
-        if (question == null) {
-            if (other.question != null) return false;
-            else if (!question.equals(null)) {
-                return false;
-            }
-        }
-        return questionNumber == other.questionNumber;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Question question1 = (Question) o;
+
+        if (id != question1.id) return false;
+        if (rightAnswer != question1.rightAnswer) return false;
+        if (quizId != question1.quizId) return false;
+        return questionNumber == question1.questionNumber && question.equals(question1.question);
+
     }
 
     @Override

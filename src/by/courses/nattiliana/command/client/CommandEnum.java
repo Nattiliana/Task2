@@ -2,10 +2,7 @@ package by.courses.nattiliana.command.client;
 
 import by.courses.nattiliana.command.*;
 import by.courses.nattiliana.command.student.*;
-import by.courses.nattiliana.command.tutor.CreateQuizCommand;
-import by.courses.nattiliana.command.tutor.DeleteQuizCommand;
-import by.courses.nattiliana.command.tutor.GoBackToTutorMainCommand;
-import by.courses.nattiliana.command.tutor.ShowTutorStatisticsCommand;
+import by.courses.nattiliana.command.tutor.*;
 
 public enum CommandEnum {
 
@@ -78,6 +75,16 @@ public enum CommandEnum {
     UPDATE {
         {
             this.command = new UpdateUserCommand();
+        }
+    },
+    DELETE_USER {
+        {
+            this.command = new DeleteUserCommand();
+        }
+    },
+    GO_TO_CREATE_QUIZ {
+        {
+            this.command = new GoToCreateQuizCommand();
         }
     };
 

@@ -37,7 +37,7 @@ public class QuestionDAO {
 
     public static List<Question> findAllById(int quizId) throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_ALL_QUESTIONS);
+        PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_ALL_QUESTIONS_BY_ID);
         preparedStatement.setInt(1, quizId);
         ResultSet resultSet = preparedStatement.executeQuery();
         List<Question> questionList = new ArrayList<>();

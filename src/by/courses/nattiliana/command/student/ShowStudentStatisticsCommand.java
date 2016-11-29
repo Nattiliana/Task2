@@ -22,15 +22,13 @@ import java.sql.SQLException;
  */
 public class ShowStudentStatisticsCommand implements ActionCommand {
 
-    private static User user;
-
     @Override
     public String execute(HttpServletRequest request) {
         String page;
         HttpSession httpSession = request.getSession();
         ClientType clientType = (ClientType) httpSession.getAttribute(Parameters.USERROLE);
         if (clientType == ClientType.USER) {
-            user = (User) httpSession.getAttribute(Parameters.USER);
+            User user = (User) httpSession.getAttribute(Parameters.USER);
             String login = user.getLogin();
             try {
                 RegistrationList list = RegistrationListDAO.getListByLogin(login);

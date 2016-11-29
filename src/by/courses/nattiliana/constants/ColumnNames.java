@@ -6,7 +6,6 @@ package by.courses.nattiliana.constants;
  */
 public class ColumnNames {
 
-    public static final String USER_ID = "uid";
     public static final String USER_NAME = "name";
     public static final String USER_SURNAME = "surname";
     public static final String USER_LOGIN = "login";

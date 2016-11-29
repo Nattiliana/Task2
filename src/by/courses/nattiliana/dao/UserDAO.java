@@ -20,13 +20,15 @@ import java.util.List;
  */
 public class UserDAO {
 
-    public List<User> findAll() throws SQLException {
+    public static List<User> findAll() throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_ALL_STUDENTS);
         ResultSet resultSet = preparedStatement.executeQuery();
         List<User> userList = new ArrayList<>();
         while (resultSet.next()){
             User user = new User();
+            user.setLogin(resultSet.getString(ColumnNames.USER_LOGIN));
+            user.setPassword(resultSet.getString(ColumnNames.USER_PASSWORD));
             user.setName(resultSet.getString(ColumnNames.USER_NAME));
             user.setSurname(resultSet.getString(ColumnNames.USER_SURNAME));
             userList.add(user);
@@ -114,6 +116,14 @@ public class UserDAO {
         statement.setString(1, name);
         statement.setString(2, surname);
         statement.setString(3, login);
+        statement.executeUpdate();
+        ConnectionPool.INSTANCE.closeConnection(connection);
+    }
+
+    public static void deleteUser(String login) throws SQLException{
+        Connection connection = ConnectionPool.INSTANCE.getConnection();
+        PreparedStatement statement = connection.prepareStatement(SQLRequests.DELETE_USER);
+        statement.setString(1, login);
         statement.executeUpdate();
         ConnectionPool.INSTANCE.closeConnection(connection);
     }

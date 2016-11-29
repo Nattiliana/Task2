@@ -6,7 +6,7 @@
     <link href="css/styles.css" media="screen" rel="stylesheet">
     <script type="text/javascript">
         function validate_form() {
-            if (document.CreateForm.quizName == null) {
+            if (document.CreateForm.name == null) {
                 alert('You must enter quiz name.');
                 return false;
             }
@@ -17,25 +17,22 @@
 <form name="CreateForm" method="POST" action="controller" onsubmit="return validate_form ( );">
     <input type="hidden" name="command" value="create_quiz"/>
     Choose subject: <br/>
-    <%--<select>
-        <c:forEach var="subject" items="${subjectList}">
-            <option value="${subject.subjectName}">${subject.subjectName}</option>
-        </c:forEach>
-    </select>--%>
     <table align="center" border="1">
         <tr bgcolor="#9841C4">
             <td align="center"><strong>Subject</strong></td>
+            <td align="center"><strong>Subject ID</strong></td>
         </tr>
         <c:forEach var="sub" items="${subjectList}">
             <tr>
                 <td><c:out value="${sub.subjectName}"/></td>
+                <td><c:out value="${sub.id}"/></td>
                 <td><input type="radio" name="subject" value="${sub.id}"/><br></td>
             </tr>
         </c:forEach>
     </table>
     <br/>
     Enter quiz name: <br/>
-    <input type="text" name="quizName" value="" class="input" placeholder="Quiz 1" required="required"/> <br/>
+    <input type="text" name="name" value="" class="input" placeholder="Quiz name" required="required"/> <br/>
     <br/>
     Choose questions:
     <table align="center" border="1">
@@ -55,14 +52,13 @@
             </tr>
         </c:forEach>
     </table>
-    ${registrationMessage}
-    ${errorUserExsists}
-    ${errorDatabase}
+    ${errorEmptyChoice}
+    ${errorEmptyList}
     <br/>
     <input type="submit" class="button" value="Create quiz"/> <br/>
+</form>
     <a href="controller?command=go_back_to_tutor">Go back</a><br/>
     <a href="controller?command=logout">Logout</a><br/>
-</form>
 </body>
 </html>
 

@@ -6,10 +6,7 @@ import by.courses.nattiliana.constants.MessageConstants;
 import by.courses.nattiliana.constants.Parameters;
 import by.courses.nattiliana.dao.QuestionDAO;
 import by.courses.nattiliana.dao.QuizDAO;
-import by.courses.nattiliana.dao.SubjectDAO;
-import by.courses.nattiliana.entities.Question;
 import by.courses.nattiliana.entities.Quiz;
-import by.courses.nattiliana.entities.Subject;
 import by.courses.nattiliana.filter.ClientType;
 import by.courses.nattiliana.log4j.QuizLogger;
 import by.courses.nattiliana.resource.ConfigurationManager;
@@ -36,29 +33,27 @@ public class CreateQuizCommand implements ActionCommand {
         HttpSession httpSession = request.getSession();
         ClientType clientType = (ClientType) httpSession.getAttribute(Parameters.USERROLE);
         if (clientType == ClientType.ADMINISTRATOR) {
-            try {
-                List<Subject> subjectList = SubjectDAO.findAll();
-                httpSession.setAttribute(Parameters.SUBJECT_LIST, subjectList);
-                List<Question> questionList = QuestionDAO.findAll();
-                httpSession.setAttribute(Parameters.QUESTION_LIST, questionList);
-                if ((request.getParameter(Parameters.QUESTION) != null) && (request.getParameter(Parameters.SUBJECT) != null) ) {
-//                    quizName = request.getParameter(Parameters.QUIZ_NAME);
-//                    subjectId = Integer.valueOf(request.getParameter(Parameters.SUBJECT));
-//                    questionId = Integer.valueOf(request.getParameter(Parameters.QUESTION));
-                    //addQuiz();
+            if (request.getParameter(Parameters.SUBJECT) != null) {
+                subjectId = Integer.valueOf(request.getParameter(Parameters.SUBJECT));
+                quizName = request.getParameter(Parameters.QUIZ_NAME);
+                questionId = Integer.valueOf(request.getParameter(Parameters.QUESTION));
+                try {
+                    addQuiz();
                     //QuestionDAO.addQuestion(questionId, subjectId);
-                    page = ConfigurationManager.getProperty(ConfigConstants.CREATE_QUIZ_PAGE_PATH);
-                    request.setAttribute(Parameters.REGISTRATION_MESSAGE,
-                            MessageManager.getProperty(MessageConstants.SUCCESS_REGISTRATION));
-                } else {
-                    page = ConfigurationManager.getProperty(ConfigConstants.CREATE_QUIZ_PAGE_PATH);
-                    request.setAttribute(Parameters.ERROR_USER_EXISTS,
-                            MessageManager.getProperty(MessageConstants.USER_EXISTS));
+                    page = ConfigurationManager.getProperty(ConfigConstants.TUTOR_PAGE_PATH);
+                    request.setAttribute(Parameters.ADD_MESSAGE,
+                            MessageManager.getProperty(MessageConstants.SUCCESS_ADD));
+                } catch (SQLException e) {
+                    QuizLogger.logError(getClass(), e.getMessage());
+                    page = ConfigurationManager.getProperty(ConfigConstants.ERROR_PAGE_PATH);
+                    request.setAttribute(Parameters.ERROR_DATABASE, MessageManager.getProperty(MessageConstants.ERROR_DATABASE));
                 }
-            } catch (SQLException e) {
-                QuizLogger.logError(getClass(), e.getMessage());
-                page = ConfigurationManager.getProperty(ConfigConstants.ERROR_PAGE_PATH);
-                request.setAttribute(Parameters.ERROR_DATABASE, MessageManager.getProperty(MessageConstants.ERROR_DATABASE));
+            } else if (!((List) httpSession.getAttribute(Parameters.SUBJECT_LIST)).isEmpty()) {
+                request.setAttribute(Parameters.ERROR_EMPTY_CHOICE, MessageManager.getProperty(MessageConstants.EMPTY_CHOICE));
+                page = ConfigurationManager.getProperty(ConfigConstants.CREATE_QUIZ_PAGE_PATH);
+            } else {
+                request.setAttribute(Parameters.ERROR_EMPTY_LIST, MessageManager.getProperty(MessageConstants.EMPTY_LIST));
+                page = ConfigurationManager.getProperty(ConfigConstants.CREATE_QUIZ_PAGE_PATH);
             }
         } else {
             page = ConfigurationManager.getProperty(ConfigConstants.LOGIN_PAGE_PATH);
@@ -67,24 +62,10 @@ public class CreateQuizCommand implements ActionCommand {
         return page;
     }
 
-    private boolean isNotEmpty() {
-        boolean isEmpty = false;
-        if (!quizName.isEmpty()) {
-            isEmpty = true;
-        }
-        return isEmpty;
-    }
-
     private void addQuiz() throws SQLException {
         Quiz quiz = new Quiz();
         quiz.setQuizName(quizName);
         quiz.setSubjectId(subjectId);
         QuizDAO.createEntity(quiz);
     }
-
-    /*private void addQuestion() throws SQLException {
-        Question question = new Question();
-        question.setQuizId(quizId);
-        QuestionDAO.createEntity();
-    }*/
 }

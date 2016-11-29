@@ -17,9 +17,7 @@ public class Answer {
 
         Answer answer1 = (Answer) o;
 
-        if (id != answer1.id) return false;
-        if (questionId != answer1.questionId) return false;
-        return answer.equals(answer1.answer);
+        return id == answer1.id && questionId == answer1.questionId && answer.equals(answer1.answer);
 
     }
 
