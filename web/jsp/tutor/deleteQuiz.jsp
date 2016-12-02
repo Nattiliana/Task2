@@ -13,21 +13,17 @@
     Choose quiz to delete:
     <table align="center" border="1">
         <tr bgcolor="#9841C4">
-            <%--<td align="center"><strong>ID</strong></td>--%>
             <td align="center"><strong>Quiz Name</strong></td>
             <td align="center"><strong>Subject</strong></td>
         </tr>
         <c:forEach var="quiz" items="${quizList}">
             <tr>
-                <%--<td><c:out value="${quiz.id}"/></td>--%>
                 <td><c:out value="${quiz.quizName}"/></td>
                 <td><c:out value="${quiz.subjectName}"/></td>
-                <td><input type="radio" name="toDelete" value="${quiz.id}"/><br></td>
+                <td><input type="checkbox" name="toDelete" value="${quiz.id}"/><br></td>
             </tr>
         </c:forEach>
     </table>
-    ${registrationMessage}
-    ${errorDatabase}
     ${errorEmptyChoice}
     ${errorEmptyList}
     <br/>

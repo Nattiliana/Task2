@@ -18,34 +18,16 @@ import java.util.List;
  */
 public class QuizDAO {
 
-    public static List<Quiz> findAll() throws SQLException {
-        Connection connection = ConnectionPool.INSTANCE.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_ALL_QUIZZES);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        List<Quiz> quizList = new ArrayList<>();
-        while (resultSet.next()){
-            Quiz quiz = new Quiz();
-            quiz.setId(resultSet.getInt(ColumnNames.QUIZ_ID));
-            quiz.setQuizName(resultSet.getString(ColumnNames.QUIZ_NAME));
-            quiz.setSubjectId(resultSet.getInt(ColumnNames.QUIZ_SUBJECT_ID));
-            quiz.setStatus(resultSet.getInt(ColumnNames.QUIZ_STATUS));
-            quizList.add(quiz);
-        }
-        ConnectionPool.INSTANCE.closeConnection(connection);
-        return quizList;
-    }
-
     public static List<Quiz> findAllAvailable() throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_ALL_AVAILABLE_QUIZZES);
         ResultSet resultSet = preparedStatement.executeQuery();
         List<Quiz> quizList = new ArrayList<>();
-        while (resultSet.next()){
+        while (resultSet.next()) {
             Quiz quiz = new Quiz();
             quiz.setId(resultSet.getInt(ColumnNames.QUIZ_ID));
             quiz.setQuizName(resultSet.getString(ColumnNames.QUIZ_NAME));
             quiz.setSubjectId(resultSet.getInt(ColumnNames.QUIZ_SUBJECT_ID));
-            quiz.setQuizName(resultSet.getString(ColumnNames.SUBJECT_NAME));
             quiz.setStatus(resultSet.getInt(ColumnNames.QUIZ_STATUS));
             quizList.add(quiz);
         }
@@ -68,14 +50,14 @@ public class QuizDAO {
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.CHECK_QUIZ_NAME);
         preparedStatement.setString(1, name);
         ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()){
+        if (resultSet.next()) {
             isExistsQuiz = true;
         }
         ConnectionPool.INSTANCE.closeConnection(connection);
         return isExistsQuiz;
     }
 
-    public static void deleteQuiz(int id) throws SQLException{
+    public static void deleteQuiz(int id) throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement statement = connection.prepareStatement(SQLRequests.UPDATE_QUIZ);
         statement.setInt(1, id);

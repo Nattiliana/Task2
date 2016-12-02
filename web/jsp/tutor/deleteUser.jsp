@@ -22,7 +22,6 @@
             </tr>
         </c:forEach>
     </table>
-    ${errorDatabase}
     ${errorEmptyChoice}
     ${errorEmptyList}
     <br/>

@@ -11,7 +11,6 @@ public class Parameters {
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
     public static final String SUBJECT_LIST = "subjectList";
-    public static final String SUBJECT_ID = "id";
     public static final String QUESTION_LIST = "questionList";
     public static final String QUIZ_LIST = "quizList";
     public static final String QUIZ_NAME = "name";
@@ -28,6 +27,7 @@ public class Parameters {
     public static final String UPDATE_MESSAGE = "updateMessage";
     public static final String DELETE_MESSAGE = "deleteMessage";
     public static final String ADD_MESSAGE = "addMessage";
+    public static final String END_QUIZ_MESSAGE = "endMessage";
 
     public static final String DELETE = "toDelete";
     public static final String DELETE_USER = "toDeleteUser";
@@ -37,8 +37,7 @@ public class Parameters {
     public static final String REGISTRATION_LIST = "registrationList";
     public static final String QUESTION_IN_QUIZ = "questionInQuiz";
     public static final String ANSWER_LIST ="answerList";
-    public static final String QID = "qId";
-    public static final String BUTTON = "button";
+    public static final String ANSWER = "answer";
 
 
     private Parameters(){}

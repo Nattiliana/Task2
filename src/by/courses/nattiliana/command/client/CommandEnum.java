@@ -96,6 +96,21 @@ public enum CommandEnum {
         {
             this.command = new GoToDeleteUserCommand();
         }
+    },
+    GO_TO_QUIZ {
+        {
+            this.command = new GoToQuizCommand();
+        }
+    },
+    GO_BACK_TO_QUIZ {
+        {
+            this.command = new GoBackToQuizCommand();
+        }
+    },
+    GO_TO_UPDATE {
+        {
+            this.command = new GoToUpdateUserCommand();
+        }
     };
 
     ActionCommand command;

@@ -5,18 +5,10 @@
 <head>
     <title>Quiz</title>
     <link href="css/styles.css" media="screen" rel="stylesheet">
-    <script type="text/javascript">
-        function validate_form() {
-            if (!document.AnswerForm.radio.checked) {
-                alert('You must choose at least one question.');
-                return false;
-            }
-        }
-    </script>
 </head>
 <body>
-<form name="AnswerForm" method="POST" action="controller" onsubmit="return validate_form ( );">
-    <input type="hidden" name="command" value="show_quiz_next" />
+<form name="AnswerForm" method="POST" action="controller">
+    <input type="hidden" name="command" value="show_quiz"/>
     <table align="center" border="1">
         <tr bgcolor="#9841C4">
             <td align="center"><strong>Quiz Name</strong></td>
@@ -26,11 +18,10 @@
             <tr>
                 <td><c:out value="${quiz.quizName}"/></td>
                 <td><c:out value="${quiz.subjectId}"/></td>
-                <td><input type="radio" name="questionInQuiz" value="${quiz.id}"/><br></td>
+                <td><input type="radio" name="questionInQuiz" value="${quiz.id}" checked/><br></td>
             </tr>
         </c:forEach>
     </table>
-    ${errorDatabase}
     <br/>
     <input type="submit" class="button" value="Next"/> <br/>
     <a href="controller?command=go_back_to_student">Go back</a><br/>

@@ -10,7 +10,7 @@ public class SQLRequests {
     public static final String GET_ALL_SUBJECTS = "SELECT * FROM subjects";
     public static final String GET_ALL_QUIZZES = "SELECT * FROM quizzes";
     public static final String GET_ALL_RLISTS = "SELECT * FROM registrationlist";
-    public static final String GET_ALL_AVAILABLE_QUIZZES = "SELECT * FROM quizzes, subjects WHERE quizzes.subjectId = subjects.id AND status = 0";
+    public static final String GET_ALL_AVAILABLE_QUIZZES = "SELECT * FROM quizzes WHERE status = 0";
     public static final String GET_ALL_QUESTIONS_BY_ID = "SELECT * FROM questions WHERE quizId = ?";
     public static final String GET_ALL_QUESTIONS = "SELECT * FROM questions";
     public static final String GET_ALL_ANSWERS = "SELECT * FROM answers WHERE questionId = ?";
@@ -27,6 +27,8 @@ public class SQLRequests {
     public static final String UPDATE_QUIZ = "UPDATE quizzes SET status = 1 WHERE id = ?";
     public static final String UPDATE_USER = "UPDATE users SET name = ?, surname = ? WHERE login = ?";
     public static final String DELETE_USER = "UPDATE users SET userStatus = 1 WHERE login = ?";
+    public static final String CHECK_ANSWER = "SELECT * FROM answers where id = ?";
+    public static final String ADD_RL = "INSERT INTO registrationlist(student, amountOfRightAnswers) VALUES (?, ?)";
 
     private SQLRequests() {}
 }

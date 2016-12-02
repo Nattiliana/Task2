@@ -23,7 +23,7 @@ public class LoginCommand implements ActionCommand {
         String password = request.getParameter(Parameters.PASSWORD);
         try {
             if (UserDAO.isAuthorized(login, password)) {
-                HttpSession session = request.getSession(true);
+                HttpSession session = request.getSession();
                 User user = UserDAO.getUserByLogin(login);
                 ClientType clientType = UserDAO.checkUserRole(login);
                 session.setAttribute(Parameters.USERROLE, clientType);

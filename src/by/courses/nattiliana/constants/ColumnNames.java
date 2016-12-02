@@ -29,10 +29,12 @@ public class ColumnNames {
     public static final String RL_ID = "id";
     public static final String RL_STUDENT = "student";
     public static final String RL_ANSWERS = "amountOfRightAnswers";
+    public static final String RL_QUIZ_ID = "quizId";
 
     public static final String ANSWER_ID = "id";
     public static final String ANSWER_QUESTION_ID = "questionId";
     public static final String ANSWER = "answer";
+    public static final String IS_RIGHT = "isRight";
 
     private ColumnNames(){}
 }

@@ -27,7 +27,11 @@ public class RegistrationList {
 
     @Override
     public String toString() {
-        return "Student login: " + student + " Amount of right answers: " + amountOfRightAnswers;
+        return "RegistrationList{" +
+                "id=" + id +
+                ", student='" + student + '\'' +
+                ", amountOfRightAnswers=" + amountOfRightAnswers +
+                '}';
     }
 
     public String getStudent() {

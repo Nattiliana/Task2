@@ -3,7 +3,9 @@ package by.courses.nattiliana.dao;
 import by.courses.nattiliana.connectionPool.ConnectionPool;
 import by.courses.nattiliana.constants.ColumnNames;
 import by.courses.nattiliana.constants.SQLRequests;
+import by.courses.nattiliana.constants.UserRole;
 import by.courses.nattiliana.entities.RegistrationList;
+import by.courses.nattiliana.filter.ClientType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,7 +26,7 @@ public class RegistrationListDAO {
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_LIST_BY_LOGIN);
         preparedStatement.setString(1, login);
         ResultSet resultSet = preparedStatement.executeQuery();
-        while(resultSet.next()){
+        while (resultSet.next()) {
             list = new RegistrationList();
             list.setId(resultSet.getInt(ColumnNames.RL_ID));
             list.setStudent(resultSet.getString(ColumnNames.RL_STUDENT));
@@ -39,7 +41,7 @@ public class RegistrationListDAO {
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_ALL_RLISTS);
         ResultSet resultSet = preparedStatement.executeQuery();
         List<RegistrationList> registrationLists = new ArrayList<>();
-        while (resultSet.next()){
+        while (resultSet.next()) {
             RegistrationList list = new RegistrationList();
             list.setId(resultSet.getInt(ColumnNames.RL_ID));
             list.setStudent(resultSet.getString(ColumnNames.RL_STUDENT));
@@ -48,5 +50,14 @@ public class RegistrationListDAO {
         }
         ConnectionPool.INSTANCE.closeConnection(connection);
         return registrationLists;
+    }
+
+    public static void createEntity(RegistrationList list) throws SQLException {
+        Connection connection = ConnectionPool.INSTANCE.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.ADD_RL);
+        preparedStatement.setString(1, list.getStudent());
+        preparedStatement.setInt(2, list.getAmountOfRightAnswers());
+        preparedStatement.execute();
+        ConnectionPool.INSTANCE.closeConnection(connection);
     }
 }

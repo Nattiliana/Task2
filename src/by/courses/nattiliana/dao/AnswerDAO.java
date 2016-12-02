@@ -34,4 +34,19 @@ public class AnswerDAO {
         ConnectionPool.INSTANCE.closeConnection(connection);
         return list;
     }
+
+    public static boolean isChecked(int id) throws SQLException {
+        boolean isRight = false;
+        Connection connection = ConnectionPool.INSTANCE.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.CHECK_ANSWER);
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            if (resultSet.getInt(ColumnNames.IS_RIGHT) == 1) {
+                isRight = true;
+            }
+        }
+        ConnectionPool.INSTANCE.closeConnection(connection);
+        return isRight;
+    }
 }

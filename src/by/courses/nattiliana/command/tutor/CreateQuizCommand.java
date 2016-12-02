@@ -25,6 +25,7 @@ public class CreateQuizCommand implements ActionCommand {
 
     private static String quizName;
     private static int subjectId;
+    private static int questionId;
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -35,12 +36,10 @@ public class CreateQuizCommand implements ActionCommand {
             if (request.getParameter(Parameters.SUBJECT) != null) {
                 subjectId = Integer.valueOf(request.getParameter(Parameters.SUBJECT));
                 quizName = request.getParameter(Parameters.QUIZ_NAME);
-                String[] ids = request.getParameterValues(Parameters.QUESTION);
+                questionId = Integer.valueOf(request.getParameter(Parameters.QUESTION));
                 try {
                     addQuiz();
-                    for (int i = 0; i < ids.length; i++) {
-                        QuestionDAO.addQuestion(Integer.parseInt(ids[i]), subjectId);
-                    }
+                    QuestionDAO.addQuestion(questionId, subjectId);
                     page = ConfigurationManager.getProperty(ConfigConstants.TUTOR_PAGE_PATH);
                     request.setAttribute(Parameters.ADD_MESSAGE,
                             MessageManager.getProperty(MessageConstants.SUCCESS_ADD));
