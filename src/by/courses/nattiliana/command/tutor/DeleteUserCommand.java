@@ -5,7 +5,6 @@ import by.courses.nattiliana.constants.ConfigConstants;
 import by.courses.nattiliana.constants.MessageConstants;
 import by.courses.nattiliana.constants.Parameters;
 import by.courses.nattiliana.dao.UserDAO;
-import by.courses.nattiliana.entities.User;
 import by.courses.nattiliana.filter.ClientType;
 import by.courses.nattiliana.log4j.QuizLogger;
 import by.courses.nattiliana.resource.ConfigurationManager;

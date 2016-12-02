@@ -6,10 +6,8 @@ import by.courses.nattiliana.constants.MessageConstants;
 import by.courses.nattiliana.constants.Parameters;
 import by.courses.nattiliana.dao.AnswerDAO;
 import by.courses.nattiliana.dao.QuestionDAO;
-import by.courses.nattiliana.dao.QuizDAO;
 import by.courses.nattiliana.entities.Answer;
 import by.courses.nattiliana.entities.Question;
-import by.courses.nattiliana.entities.Quiz;
 import by.courses.nattiliana.filter.ClientType;
 import by.courses.nattiliana.resource.ConfigurationManager;
 import by.courses.nattiliana.resource.MessageManager;
@@ -17,7 +15,6 @@ import by.courses.nattiliana.resource.MessageManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

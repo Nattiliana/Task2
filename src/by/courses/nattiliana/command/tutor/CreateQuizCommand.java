@@ -25,7 +25,6 @@ public class CreateQuizCommand implements ActionCommand {
 
     private static String quizName;
     private static int subjectId;
-    private static int questionId;
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -36,7 +35,7 @@ public class CreateQuizCommand implements ActionCommand {
             if (request.getParameter(Parameters.SUBJECT) != null) {
                 subjectId = Integer.valueOf(request.getParameter(Parameters.SUBJECT));
                 quizName = request.getParameter(Parameters.QUIZ_NAME);
-                questionId = Integer.valueOf(request.getParameter(Parameters.QUESTION));
+                int questionId = Integer.valueOf(request.getParameter(Parameters.QUESTION));
                 try {
                     addQuiz();
                     QuestionDAO.addQuestion(questionId, subjectId);

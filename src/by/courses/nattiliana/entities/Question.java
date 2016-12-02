@@ -18,8 +18,7 @@ public class Question {
 
         if (id != question1.id) return false;
         if (rightAnswer != question1.rightAnswer) return false;
-        if (quizId != question1.quizId) return false;
-        return questionNumber == question1.questionNumber && question.equals(question1.question);
+        return quizId == question1.quizId && questionNumber == question1.questionNumber && question.equals(question1.question);
 
     }
 

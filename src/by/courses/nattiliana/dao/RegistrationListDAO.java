@@ -3,9 +3,7 @@ package by.courses.nattiliana.dao;
 import by.courses.nattiliana.connectionPool.ConnectionPool;
 import by.courses.nattiliana.constants.ColumnNames;
 import by.courses.nattiliana.constants.SQLRequests;
-import by.courses.nattiliana.constants.UserRole;
 import by.courses.nattiliana.entities.RegistrationList;
-import by.courses.nattiliana.filter.ClientType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

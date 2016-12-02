@@ -30,9 +30,9 @@ public class DeleteQuizCommand implements ActionCommand {
             try {
                 if (request.getParameter(Parameters.DELETE) != null) {
                     String[] ids = request.getParameterValues(Parameters.DELETE);
-                        for (int i = 0; i < ids.length; i++) {
-                            QuizDAO.deleteQuiz(Integer.parseInt(ids[i]));
-                        }
+                    for (String id : ids) {
+                        QuizDAO.deleteQuiz(Integer.parseInt(id));
+                    }
                     request.setAttribute(Parameters.DELETE_MESSAGE, MessageManager.getProperty(MessageConstants.SUCCESS_DELETE));
                     page = ConfigurationManager.getProperty(ConfigConstants.TUTOR_PAGE_PATH);
                     QuizLogger.logInfo(getClass(), MessageManager.getProperty(MessageConstants.SUCCESS_DELETE));
