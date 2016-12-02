@@ -30,7 +30,7 @@ public class DeleteUserCommand implements ActionCommand {
             try {
                 if (request.getParameter(Parameters.DELETE_USER) != null) {
                     String login = String.valueOf(request.getParameter(Parameters.DELETE_USER));
-                    UserDAO.deleteUser(login);
+                    UserDAO.USER_DAO.deleteUser(login);
                     page = ConfigurationManager.getProperty(ConfigConstants.TUTOR_PAGE_PATH);
                     request.setAttribute(Parameters.DELETE_MESSAGE, MessageManager.getProperty(MessageConstants.SUCCESS_DELETE));
                 } else if (!((List) httpSession.getAttribute(Parameters.USER_LIST)).isEmpty()) {

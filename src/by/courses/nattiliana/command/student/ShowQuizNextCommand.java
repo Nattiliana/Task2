@@ -63,6 +63,6 @@ public class ShowQuizNextCommand implements ActionCommand {
         RegistrationList list = new RegistrationList();
         list.setStudent(login);
         list.setAmountOfRightAnswers(count);
-        RegistrationListDAO.createEntity(list);
+        RegistrationListDAO.REGISTRATION_LIST_DAO.createEntity(list);
     }
 }

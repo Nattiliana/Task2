@@ -30,7 +30,7 @@ public class GoToUpdateUserCommand implements ActionCommand {
         String login = user.getLogin();
         if (clientType == ClientType.USER) {
             try {
-                user = UserDAO.getUserByLogin(login);
+                user = UserDAO.USER_DAO.getUserByLogin(login);
                 session.setAttribute(Parameters.USER, user);
                 page = ConfigurationManager.getProperty(ConfigConstants.UPDATE_STUDENT);
             } catch (SQLException e) {

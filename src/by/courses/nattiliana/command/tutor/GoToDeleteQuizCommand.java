@@ -29,7 +29,7 @@ public class GoToDeleteQuizCommand implements ActionCommand {
         ClientType clientType = (ClientType) httpSession.getAttribute(Parameters.USERROLE);
         if (clientType == ClientType.ADMINISTRATOR) {
             try {
-                List<Quiz> quizList = QuizDAO.findAllAvailable();
+                List<Quiz> quizList = QuizDAO.QUIZ_DAO.findAll();
                 httpSession.setAttribute(Parameters.QUIZ_LIST, quizList);
                 page = ConfigurationManager.getProperty(ConfigConstants.DELETE_QUIZ_PAGE_PATH);
             } catch (SQLException e) {

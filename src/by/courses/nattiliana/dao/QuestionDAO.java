@@ -16,9 +16,10 @@ import java.util.List;
  * Created by Nataly on 22.11.2016.
  * ${VERSION}
  */
-public class QuestionDAO {
+public enum  QuestionDAO implements AbstractDAO<Question> {
+    QUESTION_DAO;
 
-    public static List<Question> findAll() throws SQLException {
+    public List<Question> findAll() throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_ALL_QUESTIONS);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -35,7 +36,7 @@ public class QuestionDAO {
         return questionList;
     }
 
-    public static List<Question> findAllById(int quizId) throws SQLException {
+    public List<Question> findAllById(int quizId) throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_ALL_QUESTIONS_BY_ID);
         preparedStatement.setInt(1, quizId);
@@ -53,7 +54,12 @@ public class QuestionDAO {
         return questionList;
     }
 
-    public static void addQuestion(int questionId, int quizId) throws SQLException {
+    @Override
+    public void createEntity(Question entity) throws SQLException {
+
+    }
+
+    public void addQuestion(int questionId, int quizId) throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.ADD_QUESTION);
         preparedStatement.setInt(1, quizId);

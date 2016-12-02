@@ -1,6 +1,6 @@
 package by.courses.nattiliana.entities;
 
-public class User {
+public class User extends Entity {
 
     private String login;
     private String password;

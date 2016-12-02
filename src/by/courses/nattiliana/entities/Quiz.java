@@ -1,6 +1,6 @@
 package by.courses.nattiliana.entities;
 
-public class Quiz {
+public class Quiz extends Entity {
 
     private int id;
     private String quizName;

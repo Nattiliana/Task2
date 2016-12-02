@@ -28,10 +28,10 @@ public class UpdateUserCommand implements ActionCommand {
         String name = request.getParameter(Parameters.NAME);
         String surname = request.getParameter(Parameters.SURNAME);
             try {
-                if (UserDAO.isAuthorized(login, password)) {
-                    UserDAO.updateUser(login, name, surname);
+                if (UserDAO.USER_DAO.isAuthorized(login, password)) {
+                    UserDAO.USER_DAO.updateUser(login, name, surname);
                     HttpSession session = request.getSession();
-                    User user = UserDAO.getUserByLogin(login);
+                    User user = UserDAO.USER_DAO.getUserByLogin(login);
                     session.setAttribute(Parameters.USER, user);
                     page = ConfigurationManager.getProperty(ConfigConstants.STUDENT_PAGE_PATH);
                     request.setAttribute(Parameters.UPDATE_MESSAGE,

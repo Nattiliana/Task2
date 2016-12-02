@@ -29,7 +29,7 @@ public class GoToDeleteUserCommand implements ActionCommand {
         ClientType clientType = (ClientType) httpSession.getAttribute(Parameters.USERROLE);
         if (clientType == ClientType.ADMINISTRATOR) {
             try {
-                List<User> userList = UserDAO.findAll();
+                List<User> userList = UserDAO.USER_DAO.findAll();
                 httpSession.setAttribute(Parameters.USER_LIST, userList);
                 page = ConfigurationManager.getProperty(ConfigConstants.DELETE_USER_PAGE_PATH);
             } catch (SQLException e) {

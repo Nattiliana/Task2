@@ -16,9 +16,10 @@ import java.util.List;
  * Created by Nataly on 25.11.2016.
  * ${VERSION}
  */
-public class RegistrationListDAO {
+public enum  RegistrationListDAO implements AbstractDAO<RegistrationList> {
+    REGISTRATION_LIST_DAO;
 
-    public static RegistrationList getListByLogin(String login) throws SQLException {
+    public RegistrationList getListByLogin(String login) throws SQLException {
         RegistrationList list = null;
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_LIST_BY_LOGIN);
@@ -34,7 +35,8 @@ public class RegistrationListDAO {
         return list;
     }
 
-    public static List<RegistrationList> findAll() throws SQLException {
+    @Override
+    public List<RegistrationList> findAll() throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_ALL_RLISTS);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -50,7 +52,13 @@ public class RegistrationListDAO {
         return registrationLists;
     }
 
-    public static void createEntity(RegistrationList list) throws SQLException {
+    @Override
+    public List<RegistrationList> findAllById(int id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public void createEntity(RegistrationList list) throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.ADD_RL);
         preparedStatement.setString(1, list.getStudent());

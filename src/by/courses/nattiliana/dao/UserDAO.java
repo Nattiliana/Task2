@@ -18,9 +18,11 @@ import java.util.List;
  * Created by Nataly on 14.11.2016.
  * ${VERSION}
  */
-public class UserDAO {
+public enum  UserDAO implements AbstractDAO<User> {
+    USER_DAO;
 
-    public static List<User> findAll() throws SQLException {
+    @Override
+    public List<User> findAll() throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_ALL_STUDENTS);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -37,7 +39,12 @@ public class UserDAO {
         return userList;
     }
 
-    public static boolean isAuthorized(String login, String password) throws SQLException {
+    @Override
+    public List<User> findAllById(int id) throws SQLException {
+        return null;
+    }
+
+    public boolean isAuthorized(String login, String password) throws SQLException {
         boolean isUser = false;
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.CHECK_AUTHORIZATION);
@@ -51,7 +58,7 @@ public class UserDAO {
         return isUser;
     }
 
-    public static boolean isExists(String login) throws SQLException {
+    public boolean isExists(String login) throws SQLException {
         boolean isExistsUser = false;
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.CHECK_LOGIN);
@@ -64,7 +71,8 @@ public class UserDAO {
         return isExistsUser;
     }
 
-    public static void createEntity(User user) throws SQLException {
+    @Override
+    public void createEntity(User user) throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.ADD_STUDENT);
         preparedStatement.setString(1, user.getLogin());
@@ -75,7 +83,7 @@ public class UserDAO {
         ConnectionPool.INSTANCE.closeConnection(connection);
     }
 
-    public static ClientType checkUserRole(String login) throws SQLException {
+    public ClientType checkUserRole(String login) throws SQLException {
         ClientType clientType = null;
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.CHECK_USER_ROLE);
@@ -92,7 +100,7 @@ public class UserDAO {
         return clientType;
     }
 
-    public static User getUserByLogin(String login) throws SQLException{
+    public User getUserByLogin(String login) throws SQLException{
         User user = null;
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_USER_BY_LOGIN);
@@ -110,7 +118,7 @@ public class UserDAO {
         return user;
     }
 
-    public static void updateUser(String login, String name, String surname) throws SQLException{
+    public void updateUser(String login, String name, String surname) throws SQLException{
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement statement = connection.prepareStatement(SQLRequests.UPDATE_USER);
         statement.setString(1, name);
@@ -120,7 +128,7 @@ public class UserDAO {
         ConnectionPool.INSTANCE.closeConnection(connection);
     }
 
-    public static void deleteUser(String login) throws SQLException{
+    public void deleteUser(String login) throws SQLException{
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement statement = connection.prepareStatement(SQLRequests.DELETE_USER);
         statement.setString(1, login);

@@ -16,9 +16,10 @@ import java.util.List;
  * Created by Nataly on 25.11.2016.
  * ${VERSION}
  */
-public class AnswerDAO {
+public enum  AnswerDAO implements AbstractDAO<Answer> {
+    ANSWER_DAO;
 
-    public static List<Answer> findAllById(int questionId) throws SQLException {
+    public List<Answer> findAllById(int questionId) throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_ALL_ANSWERS);
         preparedStatement.setInt(1, questionId);
@@ -48,5 +49,15 @@ public class AnswerDAO {
         }
         ConnectionPool.INSTANCE.closeConnection(connection);
         return isRight;
+    }
+
+    @Override
+    public List<Answer> findAll() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public void createEntity(Answer entity) throws SQLException {
+
     }
 }

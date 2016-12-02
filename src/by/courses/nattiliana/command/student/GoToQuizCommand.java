@@ -28,7 +28,7 @@ public class GoToQuizCommand implements ActionCommand {
         ClientType clientType = (ClientType) httpSession.getAttribute(Parameters.USERROLE);
         if (clientType == ClientType.USER) {
             try {
-                List<Quiz> quizzes = QuizDAO.findAllAvailable();
+                List<Quiz> quizzes = QuizDAO.QUIZ_DAO.findAll();
                 httpSession.setAttribute(Parameters.QUIZ_LIST, quizzes);
                 page = ConfigurationManager.getProperty(ConfigConstants.QUIZ_PAGE_PATH);
             } catch (SQLException e) {

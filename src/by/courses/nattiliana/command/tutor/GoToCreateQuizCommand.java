@@ -31,9 +31,9 @@ public class GoToCreateQuizCommand implements ActionCommand {
         ClientType clientType = (ClientType) httpSession.getAttribute(Parameters.USERROLE);
         if (clientType == ClientType.ADMINISTRATOR) {
             try {
-                List<Subject> subjectList = SubjectDAO.findAll();
+                List<Subject> subjectList = SubjectDAO.SUBJECT_DAO.findAll();
                 httpSession.setAttribute(Parameters.SUBJECT_LIST, subjectList);
-                List<Question> questionList = QuestionDAO.findAll();
+                List<Question> questionList = QuestionDAO.QUESTION_DAO.findAll();
                 httpSession.setAttribute(Parameters.QUESTION_LIST, questionList);
                 page = ConfigurationManager.getProperty(ConfigConstants.CREATE_QUIZ_PAGE_PATH);
             } catch (SQLException e) {

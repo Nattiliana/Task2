@@ -4,7 +4,7 @@ package by.courses.nattiliana.entities;
  * Created by Nataly on 25.11.2016.
  * ${VERSION}
  */
-public class Answer {
+public class Answer extends Entity {
 
     private int id;
     private int questionId;

@@ -22,10 +22,10 @@ public class LoginCommand implements ActionCommand {
         String login = request.getParameter(Parameters.LOGIN);
         String password = request.getParameter(Parameters.PASSWORD);
         try {
-            if (UserDAO.isAuthorized(login, password)) {
+            if (UserDAO.USER_DAO.isAuthorized(login, password)) {
                 HttpSession session = request.getSession();
-                User user = UserDAO.getUserByLogin(login);
-                ClientType clientType = UserDAO.checkUserRole(login);
+                User user = UserDAO.USER_DAO.getUserByLogin(login);
+                ClientType clientType = UserDAO.USER_DAO.checkUserRole(login);
                 session.setAttribute(Parameters.USERROLE, clientType);
                 session.setAttribute(Parameters.USER, user);
                 if (ClientType.USER.equals(clientType)) {

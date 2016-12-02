@@ -32,11 +32,11 @@ public class ShowQuizCommand implements ActionCommand {
             try {
                 if (request.getParameter(Parameters.QUESTION_IN_QUIZ) != null) {
                     int id = Integer.valueOf(request.getParameter(Parameters.QUESTION_IN_QUIZ));
-                    List<Question> questions = QuestionDAO.findAllById(id);
+                    List<Question> questions = QuestionDAO.QUESTION_DAO.findAllById(id);
                     httpSession.setAttribute(Parameters.QUESTION_LIST, questions);
                     for (Question item : questions){
                         int questionId = item.getId();
-                        List<Answer> answers = AnswerDAO.findAllById(questionId);
+                        List<Answer> answers = AnswerDAO.ANSWER_DAO.findAllById(questionId);
                         httpSession.setAttribute(Parameters.ANSWER_LIST, answers);
                     }
                     page = ConfigurationManager.getProperty(ConfigConstants.QUIZ_NEXT_PAGE_PATH);

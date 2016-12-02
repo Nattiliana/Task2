@@ -16,9 +16,11 @@ import java.util.List;
  * Created by Nataly on 15.11.2016.
  * ${VERSION}
  */
-public class  SubjectDAO {
+public enum   SubjectDAO implements AbstractDAO<Subject> {
+    SUBJECT_DAO;
 
-    public static List<Subject> findAll() throws SQLException {
+    @Override
+    public List<Subject> findAll() throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_ALL_SUBJECTS);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -31,5 +33,15 @@ public class  SubjectDAO {
         }
         ConnectionPool.INSTANCE.closeConnection(connection);
         return subjectList;
+    }
+
+    @Override
+    public List<Subject> findAllById(int id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public void createEntity(Subject entity) throws SQLException {
+
     }
 }

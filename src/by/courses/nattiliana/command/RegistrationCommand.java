@@ -30,7 +30,7 @@ public class RegistrationCommand implements ActionCommand {
         name = request.getParameter(Parameters.NAME);
         surname = request.getParameter(Parameters.SURNAME);
         try {
-            if (!(UserDAO.isExists(login))) {
+            if (!(UserDAO.USER_DAO.isExists(login))) {
                 registrate();
                 page = ConfigurationManager.getProperty(ConfigConstants.REGISTRATION_PAGE_PATH);
                 request.setAttribute(Parameters.REGISTRATION_MESSAGE,
@@ -54,7 +54,7 @@ public class RegistrationCommand implements ActionCommand {
         user.setPassword(password);
         user.setName(name);
         user.setSurname(surname);
-        UserDAO.createEntity(user);
+        UserDAO.USER_DAO.createEntity(user);
     }
 }
 

@@ -16,9 +16,11 @@ import java.util.List;
  * Created by Nataly on 18.11.2016.
  * ${VERSION}
  */
-public class QuizDAO {
+public enum  QuizDAO implements AbstractDAO<Quiz> {
+    QUIZ_DAO;
 
-    public static List<Quiz> findAllAvailable() throws SQLException {
+    @Override
+    public List<Quiz> findAll() throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_ALL_AVAILABLE_QUIZZES);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -35,7 +37,12 @@ public class QuizDAO {
         return quizList;
     }
 
-    public static void createEntity(Quiz quiz) throws SQLException {
+    @Override
+    public List<Quiz> findAllById(int id) throws SQLException {
+        return null;
+    }
+
+    public void createEntity(Quiz quiz) throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.ADD_QUIZ);
         preparedStatement.setString(1, quiz.getQuizName());
@@ -44,20 +51,7 @@ public class QuizDAO {
         ConnectionPool.INSTANCE.closeConnection(connection);
     }
 
-    public static boolean isExists(String name) throws SQLException {
-        boolean isExistsQuiz = false;
-        Connection connection = ConnectionPool.INSTANCE.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.CHECK_QUIZ_NAME);
-        preparedStatement.setString(1, name);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            isExistsQuiz = true;
-        }
-        ConnectionPool.INSTANCE.closeConnection(connection);
-        return isExistsQuiz;
-    }
-
-    public static void deleteQuiz(int id) throws SQLException {
+    public void deleteQuiz(int id) throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement statement = connection.prepareStatement(SQLRequests.UPDATE_QUIZ);
         statement.setInt(1, id);

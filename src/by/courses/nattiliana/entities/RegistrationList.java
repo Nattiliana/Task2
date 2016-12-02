@@ -1,6 +1,6 @@
 package by.courses.nattiliana.entities;
 
-public class RegistrationList {
+public class RegistrationList extends Entity {
 
     private int id;
     private String student;

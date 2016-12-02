@@ -1,6 +1,6 @@
 package by.courses.nattiliana.entities;
 
-public class Subject {
+public class Subject extends Entity {
 
     private int id;
     private String subjectName;

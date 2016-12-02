@@ -31,7 +31,7 @@ public class ShowStudentStatisticsCommand implements ActionCommand {
             User user = (User) httpSession.getAttribute(Parameters.USER);
             String login = user.getLogin();
             try {
-                RegistrationList list = RegistrationListDAO.getListByLogin(login);
+                RegistrationList list = RegistrationListDAO.REGISTRATION_LIST_DAO.getListByLogin(login);
                 request.setAttribute(Parameters.LOGIN, list.getStudent());
                 request.setAttribute(Parameters.ANSWERS, list.getAmountOfRightAnswers());
                 page = ConfigurationManager.getProperty(ConfigConstants.STUDENT_STATISTICS_PAGE_PATH);

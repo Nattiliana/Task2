@@ -1,7 +1,7 @@
 package by.courses.nattiliana.entities;
 
 
-public class Question {
+public class Question extends Entity {
 
     private int id;
     private String question;

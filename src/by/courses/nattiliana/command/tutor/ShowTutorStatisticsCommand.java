@@ -29,7 +29,7 @@ public class ShowTutorStatisticsCommand implements ActionCommand {
         ClientType clientType = (ClientType)httpSession.getAttribute(Parameters.USERROLE);
         if (clientType == ClientType.ADMINISTRATOR) {
             try {
-                List<RegistrationList> list = RegistrationListDAO.findAll();
+                List<RegistrationList> list = RegistrationListDAO.REGISTRATION_LIST_DAO.findAll();
                 httpSession.setAttribute(Parameters.REGISTRATION_LIST, list);
                 page = ConfigurationManager.getProperty(ConfigConstants.TUTOR_STATISTICS_PAGE_PATH);
             } catch (SQLException e) {

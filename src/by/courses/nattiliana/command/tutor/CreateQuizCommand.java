@@ -38,7 +38,7 @@ public class CreateQuizCommand implements ActionCommand {
                 int questionId = Integer.valueOf(request.getParameter(Parameters.QUESTION));
                 try {
                     addQuiz();
-                    QuestionDAO.addQuestion(questionId, subjectId);
+                    QuestionDAO.QUESTION_DAO.addQuestion(questionId, subjectId);
                     page = ConfigurationManager.getProperty(ConfigConstants.TUTOR_PAGE_PATH);
                     request.setAttribute(Parameters.ADD_MESSAGE,
                             MessageManager.getProperty(MessageConstants.SUCCESS_ADD));
@@ -65,6 +65,6 @@ public class CreateQuizCommand implements ActionCommand {
         Quiz quiz = new Quiz();
         quiz.setQuizName(quizName);
         quiz.setSubjectId(subjectId);
-        QuizDAO.createEntity(quiz);
+        QuizDAO.QUIZ_DAO.createEntity(quiz);
     }
 }
