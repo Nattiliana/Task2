@@ -32,6 +32,8 @@ public enum  AnswerDAO implements AbstractDAO<Answer> {
             answer.setAnswer(resultSet.getString(ColumnNames.ANSWER));
             list.add(answer);
         }
+        resultSet.close();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
         return list;
     }
@@ -47,6 +49,8 @@ public enum  AnswerDAO implements AbstractDAO<Answer> {
                 isRight = true;
             }
         }
+        resultSet.close();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
         return isRight;
     }

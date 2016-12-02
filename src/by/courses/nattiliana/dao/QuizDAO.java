@@ -33,6 +33,8 @@ public enum  QuizDAO implements AbstractDAO<Quiz> {
             quiz.setStatus(resultSet.getInt(ColumnNames.QUIZ_STATUS));
             quizList.add(quiz);
         }
+        resultSet.close();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
         return quizList;
     }
@@ -48,6 +50,7 @@ public enum  QuizDAO implements AbstractDAO<Quiz> {
         preparedStatement.setString(1, quiz.getQuizName());
         preparedStatement.setInt(2, quiz.getSubjectId());
         preparedStatement.execute();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
     }
 
@@ -56,6 +59,7 @@ public enum  QuizDAO implements AbstractDAO<Quiz> {
         PreparedStatement statement = connection.prepareStatement(SQLRequests.UPDATE_QUIZ);
         statement.setInt(1, id);
         statement.executeUpdate();
+        statement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
     }
 }

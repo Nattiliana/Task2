@@ -31,6 +31,8 @@ public enum  RegistrationListDAO implements AbstractDAO<RegistrationList> {
             list.setStudent(resultSet.getString(ColumnNames.RL_STUDENT));
             list.setAmountOfRightAnswers(resultSet.getInt(ColumnNames.RL_ANSWERS));
         }
+        resultSet.close();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
         return list;
     }
@@ -48,6 +50,8 @@ public enum  RegistrationListDAO implements AbstractDAO<RegistrationList> {
             list.setAmountOfRightAnswers(resultSet.getInt(ColumnNames.RL_ANSWERS));
             registrationLists.add(list);
         }
+        resultSet.close();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
         return registrationLists;
     }
@@ -64,6 +68,7 @@ public enum  RegistrationListDAO implements AbstractDAO<RegistrationList> {
         preparedStatement.setString(1, list.getStudent());
         preparedStatement.setInt(2, list.getAmountOfRightAnswers());
         preparedStatement.execute();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
     }
 }

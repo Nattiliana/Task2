@@ -32,6 +32,8 @@ public enum  QuestionDAO implements AbstractDAO<Question> {
             question.setQuestionNumber(resultSet.getInt(ColumnNames.QUESTION_NUMBER));
             questionList.add(question);
         }
+        resultSet.close();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
         return questionList;
     }
@@ -50,6 +52,8 @@ public enum  QuestionDAO implements AbstractDAO<Question> {
             question.setQuestionNumber(resultSet.getInt(ColumnNames.QUESTION_NUMBER));
             questionList.add(question);
         }
+        resultSet.close();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
         return questionList;
     }
@@ -65,6 +69,7 @@ public enum  QuestionDAO implements AbstractDAO<Question> {
         preparedStatement.setInt(1, quizId);
         preparedStatement.setInt(2, questionId);
         preparedStatement.execute();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
     }
 }

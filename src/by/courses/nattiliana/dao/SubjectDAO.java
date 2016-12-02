@@ -31,6 +31,8 @@ public enum   SubjectDAO implements AbstractDAO<Subject> {
             subject.setSubjectName(resultSet.getString(ColumnNames.SUBJECT_NAME));
             subjectList.add(subject);
         }
+        resultSet.close();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
         return subjectList;
     }

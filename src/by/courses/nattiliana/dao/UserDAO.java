@@ -18,7 +18,7 @@ import java.util.List;
  * Created by Nataly on 14.11.2016.
  * ${VERSION}
  */
-public enum  UserDAO implements AbstractDAO<User> {
+public enum UserDAO implements AbstractDAO<User> {
     USER_DAO;
 
     @Override
@@ -27,7 +27,7 @@ public enum  UserDAO implements AbstractDAO<User> {
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_ALL_STUDENTS);
         ResultSet resultSet = preparedStatement.executeQuery();
         List<User> userList = new ArrayList<>();
-        while (resultSet.next()){
+        while (resultSet.next()) {
             User user = new User();
             user.setLogin(resultSet.getString(ColumnNames.USER_LOGIN));
             user.setPassword(resultSet.getString(ColumnNames.USER_PASSWORD));
@@ -35,6 +35,8 @@ public enum  UserDAO implements AbstractDAO<User> {
             user.setSurname(resultSet.getString(ColumnNames.USER_SURNAME));
             userList.add(user);
         }
+        resultSet.close();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
         return userList;
     }
@@ -51,9 +53,11 @@ public enum  UserDAO implements AbstractDAO<User> {
         preparedStatement.setString(1, login);
         preparedStatement.setString(2, password);
         ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()){
+        if (resultSet.next()) {
             isUser = true;
         }
+        resultSet.close();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
         return isUser;
     }
@@ -64,9 +68,11 @@ public enum  UserDAO implements AbstractDAO<User> {
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.CHECK_LOGIN);
         preparedStatement.setString(1, login);
         ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()){
+        if (resultSet.next()) {
             isExistsUser = true;
         }
+        resultSet.close();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
         return isExistsUser;
     }
@@ -80,6 +86,7 @@ public enum  UserDAO implements AbstractDAO<User> {
         preparedStatement.setString(3, user.getName());
         preparedStatement.setString(4, user.getSurname());
         preparedStatement.execute();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
     }
 
@@ -89,24 +96,26 @@ public enum  UserDAO implements AbstractDAO<User> {
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.CHECK_USER_ROLE);
         preparedStatement.setString(1, login);
         ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()){
-            if (UserRole.STUDENT == resultSet.getInt(ColumnNames.USER_ROLE)){
+        while (resultSet.next()) {
+            if (UserRole.STUDENT == resultSet.getInt(ColumnNames.USER_ROLE)) {
                 clientType = ClientType.USER;
             } else {
                 clientType = ClientType.ADMINISTRATOR;
             }
         }
+        resultSet.close();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
         return clientType;
     }
 
-    public User getUserByLogin(String login) throws SQLException{
+    public User getUserByLogin(String login) throws SQLException {
         User user = null;
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQLRequests.GET_USER_BY_LOGIN);
         preparedStatement.setString(1, login);
         ResultSet resultSet = preparedStatement.executeQuery();
-        while(resultSet.next()){
+        while (resultSet.next()) {
             user = new User();
             user.setLogin(resultSet.getString(ColumnNames.USER_LOGIN));
             user.setPassword(resultSet.getString(ColumnNames.USER_PASSWORD));
@@ -114,25 +123,29 @@ public enum  UserDAO implements AbstractDAO<User> {
             user.setSurname(resultSet.getString(ColumnNames.USER_SURNAME));
             user.setUserRole(resultSet.getInt(ColumnNames.USER_ROLE));
         }
+        resultSet.close();
+        preparedStatement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
         return user;
     }
 
-    public void updateUser(String login, String name, String surname) throws SQLException{
+    public void updateUser(String login, String name, String surname) throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement statement = connection.prepareStatement(SQLRequests.UPDATE_USER);
         statement.setString(1, name);
         statement.setString(2, surname);
         statement.setString(3, login);
         statement.executeUpdate();
+        statement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
     }
 
-    public void deleteUser(String login) throws SQLException{
+    public void deleteUser(String login) throws SQLException {
         Connection connection = ConnectionPool.INSTANCE.getConnection();
         PreparedStatement statement = connection.prepareStatement(SQLRequests.DELETE_USER);
         statement.setString(1, login);
         statement.executeUpdate();
+        statement.close();
         ConnectionPool.INSTANCE.closeConnection(connection);
     }
 }
